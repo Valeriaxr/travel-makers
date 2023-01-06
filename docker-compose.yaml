@@ -1,14 +1,31 @@
-# volumes:
+volumes:
+  postgres-data:
+    external: true
 services:
-  fastapi:
+  api:
     build:
-      context: sample_service
+      context: ./api
       dockerfile: Dockerfile.dev
+    environment:
+      DATABASE_URL: postgresql://travelmakers:travelmakers@db/travelmakers
+      WAIT_HOSTS: db:5432
+      PORT: 8000
     ports:
       - 8000:8000
     volumes:
-      - ./sample_service:/app
-      
+      - ./api:/app
+
+  db:
+    image: postgres:14.5-bullseye
+    environment:
+      POSTGRES_PASSWORD: travelmakers
+      POSTGRES_USER: travelmakers
+      POSTGRES_DB: travelmakers
+    ports:
+      - "15432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
@@ -23,4 +40,3 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
-            
