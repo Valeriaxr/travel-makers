@@ -5,6 +5,6 @@ from queries.accounts import AccountIn, AccountOut
 router = APIRouter()
 
 
-@router.post("/api/accounts", )
-def create_account(account:AccountIn, response_model=AccountOut):
+@router.post("/api/accounts", response_model=AccountOut)
+def create_account(account:AccountIn):
     pass
