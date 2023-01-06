@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       DATABASE_URL: postgresql://travelmakers:travelmakers@db/travelmakers
+      SIGNING_KEY: victoriavaleriaandersonalexander
       WAIT_HOSTS: db:5432
       PORT: 8000
     ports:
