@@ -1,11 +1,10 @@
-from authenticator import authenticator
+# from authenticator import authenticator
 from fastapi import APIRouter
+from queries.accounts import AccountIn, AccountOut
 
 router = APIRouter()
 
 
-@router.post("/api/things")
-async def create_thing(
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
+@router.post("/api/accounts", )
+def create_account(account:AccountIn, response_model=AccountOut):
     pass
