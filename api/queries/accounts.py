@@ -49,7 +49,7 @@ class AccountRepository:
                     email=account.email,
                     hashed_password=hashed_password,
                     first_name=account.first_name,
-                    last_name=account.last_name
+                    last_name=account.last_name,
                 )
 
 
