@@ -9,7 +9,7 @@ from routers import hotels, flights, accounts
 
 app = FastAPI()
 app.include_router(authenticator.router)
-# app.include_router(hotels.router)
+app.include_router(hotels.router)
 app.include_router(flights.router)
 app.include_router(accounts.router)
 
