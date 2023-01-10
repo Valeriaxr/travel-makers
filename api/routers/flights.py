@@ -27,7 +27,7 @@ def get_flights(repo: FlightRepository=Depends()):
     return repo.get_hotels()
 
 
-@router.get('/api/flights/{flight.id}'), response_model = Optional[HotelOut])
+@router.get('/api/flights/{flight.id}'), response_model = Optional[FlightOut])
 def get_flight(
     flight_id: int,
     response: Response,
