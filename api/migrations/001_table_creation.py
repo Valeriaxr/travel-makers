@@ -53,8 +53,9 @@ steps = [
         # "Up" SQL statement
         """
         CREATE TABLE activities (
-            id VARCHAR(22) PRIMARY KEY NOT NULL UNIQUE,
+            id SERIAL PRIMARY KEY NOT NULL UNIQUE,
             activity_name VARCHAR(40) NOT NULL,
+            activity_address VARCHAR(100) NOT NULL,
             longitude NUMERIC(15) NOT NULL,
             latitude NUMERIC(15) NOT NULL,
             rating NUMERIC(2) NOT NULL,
@@ -79,7 +80,7 @@ steps = [
             outgoing_flight VARCHAR(25) REFERENCES flights("number") ON DELETE SET NULL,
             returning_flight VARCHAR(25) REFERENCES flights("number") ON DELETE SET NULL,
             num_people INTEGER,
-            activities VARCHAR(22) REFERENCES activities("id") ON DELETE SET NULL,
+            activities INTEGER REFERENCES activities("id") ON DELETE SET NULL,
             user_id INTEGER REFERENCES accounts("id") ON DELETE CASCADE NOT NULL,
             hotel_id INTEGER REFERENCES hotels("id") ON DELETE SET NULL
         );
