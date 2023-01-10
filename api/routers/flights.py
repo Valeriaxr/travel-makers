@@ -18,9 +18,6 @@ def create_flight(
     repo: FlightRepository = Depends(),
 ):
 
-response.satus_code = 400
-return repo.create(flight)
-
 
 @router.get('/api/flights', response_model=List[FlightOut] | Error)
 def get_flights(repo: FlightRepository=Depends()):
@@ -33,11 +30,11 @@ def get_flight(
     response: Response,
     repo: FlightRepository=Depends(),
 
-)
-
-
-)
-
+) -> FlightOut:
+    flight=repo.get_flight(flight_id)
+    if flight is None:
+        response.status_code=404
+        return flight
 
 
 
