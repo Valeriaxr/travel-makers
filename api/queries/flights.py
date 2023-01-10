@@ -35,7 +35,7 @@ class FlightRepository:
                             (number, departure_location, arrival_location, departure_time, arrival_time)
                         values
                             (%s, %s, %s, %s, %s)
-                        returning id:
+                        returning id;
                         """,
                         [
                             flight.number,
@@ -52,7 +52,7 @@ class FlightRepository:
 
     def get_flights(self)-> Error | List[FlightOut]:
         try:
-            with pool.connections() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
@@ -94,7 +94,7 @@ class FlightRepository:
             print(e)
             return {"message": "could not get that flight"}
 
-    def update_hotel(self, flight_id: int, flight: FlightIn) -> FlightOut | Error:
+    def update_flight(self, flight_id: int, flight: FlightIn) -> FlightOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

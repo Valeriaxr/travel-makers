@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from Typing import Union
+from typing import Union, Optional, List
 from queries.flights import (
     Error,
     FlightIn,
@@ -15,16 +15,17 @@ router = APIRouter()
 def create_flight(
     flight: FlightIn,
     response: Response,
-    repo: FlightRepository = Depends(),
+   repo: FlightRepository = Depends(),
 ):
+    return repo.create_flight(flight)
 
 
 @router.get('/api/flights', response_model=List[FlightOut] | Error)
 def get_flights(repo: FlightRepository=Depends()):
-    return repo.get_hotels()
+    return repo.get_flights()
 
 
-@router.get('/api/flights/{flight.id}'), response_model = Optional[FlightOut])
+@router.get('/api/flights/{flight.id}', response_model = Optional[FlightOut])
 def get_flight(
     flight_id: int,
     response: Response,
@@ -34,7 +35,7 @@ def get_flight(
     flight=repo.get_flight(flight_id)
     if flight is None:
         response.status_code=404
-        return flight
+    return flight
 
 
 
