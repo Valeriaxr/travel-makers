@@ -77,9 +77,10 @@ steps = [
             destination VARCHAR(20) NOT NULL,
             start_date DATE,
             end_date DATE,
-            outgoing_flight INTEGER REFERENCES flights("id") ON DELETE SET NULL,
-            returning_flight INTEGER REFERENCES flights("id") ON DELETE SET NULL,
+            outgoing_flight VARCHAR(25) REFERENCES flights("number") ON DELETE SET NULL,
+            returning_flight VARCHAR(25) REFERENCES flights("number") ON DELETE SET NULL,
             num_people INTEGER,
+            activities INTEGER REFERENCES activities("id") ON DELETE SET NULL,
             user_id INTEGER REFERENCES accounts("id") ON DELETE CASCADE NOT NULL,
             hotel_id INTEGER REFERENCES hotels("id") ON DELETE SET NULL
         );
@@ -87,22 +88,6 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE trips;
-        """
-    ],
-    [
-        # "Up" SQL statement
-        """
-        CREATE TABLE trips_activities (
-            trip_id INTEGER NOT NULL,
-            activity_id INTEGER NOT NULL,
-            PRIMARY KEY (trip_id, activity_id),
-            FOREIGN KEY (trip_id) REFERENCES trips(id) ON UPDATE CASCADE,
-            FOREIGN KEY (activity_id) REFERENCES activities(id) ON UPDATE CASCADE
-        );
-        """,
-        # "Down" SQL statement
-        """
-        DROP TABLE trips_activities;
         """
     ]
 ]
