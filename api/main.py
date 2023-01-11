@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from authenticator import authenticator
-from routers import hotels, flights, accounts, activities
+from routers import hotels, flights, accounts, activities, trips
 
 
 
@@ -13,6 +13,7 @@ app.include_router(hotels.router)
 app.include_router(flights.router)
 app.include_router(accounts.router)
 app.include_router(activities.router)
+app.include_router(trips.router)
 
 
 app.add_middleware(

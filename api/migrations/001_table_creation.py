@@ -80,7 +80,7 @@ steps = [
             outgoing_flight VARCHAR(25) REFERENCES flights("number") ON DELETE SET NULL,
             returning_flight VARCHAR(25) REFERENCES flights("number") ON DELETE SET NULL,
             num_people INTEGER,
-            activities INTEGER REFERENCES activities("id") ON DELETE SET NULL,
+            activities INTEGER ARRAY activities ON DELETE SET NULL,
             user_id INTEGER REFERENCES accounts("id") ON DELETE CASCADE NOT NULL,
             hotel_id INTEGER REFERENCES hotels("id") ON DELETE SET NULL
         );
