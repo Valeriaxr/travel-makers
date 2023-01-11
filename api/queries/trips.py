@@ -18,10 +18,9 @@ class TripIn(BaseModel):
     destination: str
     start_date: date
     end_date: date
-    outgoing_flight: str
-    returning_flight: str
+    outgoing_flight: int
+    returning_flight: int
     num_people: int
-    activities: list[int]
     user_id: int
     hotel_id: int
 
@@ -35,9 +34,8 @@ class TripOut(BaseModel):
     outgoing_flight: FlightOut
     returning_flight: FlightOut
     num_people: int
-    activities: list[ActivityOut]
-    user_id: AccountOut
-    hotel_id: HotelOut
+    user: AccountOut
+    hotel: HotelOut
 
 
 class TripRepository:
@@ -48,9 +46,9 @@ class TripRepository:
                     result = db.execute(
                         """
                         insert into trips
-                            (trip_name, destination, start_date, end_date, outgoing_flight, returning_flight, num_people, activities, user_id, hotel_id)
-                        values 
-                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                            (trip_name, destination, start_date, end_date, outgoing_flight, returning_flight, num_people, user_id, hotel_id)
+                        values
+                            (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                         returning id;
                         """,
                         [
@@ -61,13 +59,27 @@ class TripRepository:
                             trip.outgoing_flight,
                             trip.returning_flight,
                             trip.num_people,
-                            trip.activities,
                             trip.user_id,
                             trip.hotel_id
                         ]
                     )
                     id=result.fetchone()[0]
-                    return self.trip_in_to_out(id, trip)
-        except Exception:
+                    return self.get_trip(id)
+        except Exception as e:
+            print(e)
             return {"message": "create did not work"}
 
+    def get_trip(self, trip_id):
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT t.id as trip_id, t.trip_name, t.destination, t.start_date,
+                    t.end_date, f.number as outgoing_flight
+
+                    """
+                )
+
+    # def trip_in_to_out(self, id:int, trip:TripIn):
+    #     old_data=trip.dict()
+    #     return TripOut(id=id, **old_data)
