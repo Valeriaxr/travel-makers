@@ -2,10 +2,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 from queries.pool import pool
 from datetime import date
-from queries.flights import FlightOut
-from queries.activities import ActivityOut
 from queries.accounts import AccountOut
-from queries.hotels import HotelOut
 
 
 
@@ -18,11 +15,8 @@ class TripIn(BaseModel):
     destination: str
     start_date: date
     end_date: date
-    outgoing_flight: int
-    returning_flight: int
     num_people: int
     user_id: int
-    hotel_id: int
 
 
 class TripOut(BaseModel):
@@ -31,12 +25,8 @@ class TripOut(BaseModel):
     destination: str
     start_date: date
     end_date: date
-    outgoing_flight: FlightOut
-    returning_flight: FlightOut
     num_people: int
     user: AccountOut
-    hotel: HotelOut
-
 
 class TripRepository:
     def create_trip(self, trip: TripIn) -> TripOut:
@@ -46,9 +36,9 @@ class TripRepository:
                     result = db.execute(
                         """
                         insert into trips
-                            (trip_name, destination, start_date, end_date, outgoing_flight, returning_flight, num_people, user_id, hotel_id)
+                            (trip_name, destination, start_date, end_date, num_people, user_id)
                         values
-                            (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s)
                         returning id;
                         """,
                         [
@@ -56,15 +46,12 @@ class TripRepository:
                             trip.destination,
                             trip.start_date,
                             trip.end_date,
-                            trip.outgoing_flight,
-                            trip.returning_flight,
                             trip.num_people,
                             trip.user_id,
-                            trip.hotel_id
                         ]
                     )
                     id=result.fetchone()[0]
-                    return self.get_trip(id)
+                    return self.trip_in_to_out(id, trip)
         except Exception as e:
             print(e)
             return {"message": "create did not work"}
@@ -80,6 +67,6 @@ class TripRepository:
                     """
                 )
 
-    # def trip_in_to_out(self, id:int, trip:TripIn):
-    #     old_data=trip.dict()
-    #     return TripOut(id=id, **old_data)
+    def trip_in_to_out(self, id:int, trip:TripIn):
+        old_data=trip.dict()
+        return TripOut(id=id, **old_data)
