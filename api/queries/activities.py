@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from queries.pool import pool
 from datetime import date
 from typing import List, Optional
+from queries.trips import TripOut
 
 class Error(BaseModel):
     message: str
@@ -14,6 +15,7 @@ class ActivityIn(BaseModel):
     rating: float
     picture_url: str
     hotel_distance: float
+    trip_id: int
 
 class ActivityOut(BaseModel):
     id: int
@@ -24,6 +26,7 @@ class ActivityOut(BaseModel):
     rating: float
     picture_url: str
     hotel_distance: float
+    trip: TripOut
 
 class ActivityRepository:
     def create_activity(self, activity:ActivityIn)-> ActivityOut:
@@ -33,9 +36,9 @@ class ActivityRepository:
                     result = db.execute(
                         """
                         insert into activities
-                            (activity_name, activity_address, longitude, latitude, rating, picture_url, hotel_distance)
+                            (activity_name, activity_address, longitude, latitude, rating, picture_url, hotel_distance, trip_id)
                         values
-                            (%s, %s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s, %s)
                         returning id;
                         """,
                         [
@@ -46,6 +49,7 @@ class ActivityRepository:
                             activity.rating,
                             activity.picture_url,
                             activity.hotel_distance,
+                            activity.trip_id
                         ]
                     )
                     id=result.fetchone()[0]
@@ -59,7 +63,7 @@ class ActivityRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        select id, activity_name, activity_address, longitude, latitude, rating, picture_url, hotel_distance
+                        select id, activity_name, activity_address, longitude, latitude, rating, picture_url, hotel_distance, trip_id
                         from activities
                         order by activity_name
                         """
@@ -86,6 +90,7 @@ class ActivityRepository:
                             , rating
                             , picture_url
                             , hotel_distance
+                            , trip_id
                         from activities
                         where id = %s;
                         """,
@@ -113,6 +118,7 @@ class ActivityRepository:
                             , rating = %s
                             , picture_url = %s
                             , hotel_distance = %s
+                            , trip_id
                         where id = %s;
                         """,
                         [
@@ -123,7 +129,8 @@ class ActivityRepository:
                             activity.rating,
                             activity.picture_url,
                             activity.hotel_distance,
-                            activity_id
+                            activity_id,
+                            activity.trip_id
                         ]
                     )
                     return self.activity_in_to_out(activity_id, activity)
@@ -164,4 +171,5 @@ class ActivityRepository:
             rating=record[5],
             picture_url=record[6],
             hotel_distance=record[7],
+            trip_id=record[8],
         )
