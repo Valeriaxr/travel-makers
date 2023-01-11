@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List
 from queries.pool import pool
-
+from queries.trips import TripOut
 
 class Error(BaseModel):
     message: str
@@ -13,6 +13,7 @@ class HotelIn(BaseModel):
     city: str
     longitude: float
     latitude: float 
+    trip_id: int
 
 
 class HotelOut(BaseModel):
@@ -22,6 +23,7 @@ class HotelOut(BaseModel):
     city: str
     longitude: float
     latitude: float 
+    trip: TripOut
 
 
 class HotelRepository:
@@ -32,9 +34,9 @@ class HotelRepository:
                     result = db.execute(
                         """
                         insert into hotels 
-                            (hotel_name, address, city, longitude, latitude)
+                            (hotel_name, address, city, longitude, latitude, trip_id)
                         values 
-                            (%s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s)
                         returning id;
                         """,
                         [
@@ -43,6 +45,7 @@ class HotelRepository:
                             hotel.city,
                             hotel.longitude,
                             hotel.latitude,
+                            hotel.trip_id
                         ]
                     )
                     id=result.fetchone()[0]
@@ -57,7 +60,7 @@ class HotelRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        select id, hotel_name, address, city, longitude, latitude
+                        select id, hotel_name, address, city, longitude, latitude, trip_id
                         from hotels
                         order by city, hotel_name
                         """
@@ -82,6 +85,7 @@ class HotelRepository:
                             , city
                             , longitude
                             , latitude
+                            , trip_id
                         from hotels
                         where id = %s;
                         """,
@@ -107,6 +111,7 @@ class HotelRepository:
                             , city = %s
                             , longitude = %s
                             , latitude = %s
+                            , trip_id = %s
                         where id = %s; 
                         """,
                         [
@@ -115,6 +120,7 @@ class HotelRepository:
                             hotel.city,
                             hotel.longitude,
                             hotel.latitude,
+                            hotel.trip_id,
                             hotel_id
                         ]
                     )
@@ -152,5 +158,6 @@ class HotelRepository:
             city=record[3],
             longitude=record[4],
             latitude=record[5],
+            trip_id=record[6],
         )
     
