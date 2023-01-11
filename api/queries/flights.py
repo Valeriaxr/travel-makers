@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from queries.pool import pool
 from datetime import date
 from typing import List, Optional
+from queries.trips import TripOut
 
 
 class Error(BaseModel):
@@ -14,6 +15,8 @@ class FlightIn(BaseModel):
     arrival_location: str
     departure_time: date
     arrival_time: date
+    trip_id: int
+
 
 
 class FlightOut(BaseModel):
@@ -22,6 +25,7 @@ class FlightOut(BaseModel):
     arrival_location: str
     departure_time: date
     arrival_time: date
+    trip: TripOut
 
 
 class FlightRepository:
@@ -32,9 +36,9 @@ class FlightRepository:
                     result = db.execute(
                         """
                         insert into flights
-                            (number, departure_location, arrival_location, departure_time, arrival_time)
+                            (number, departure_location, arrival_location, departure_time, arrival_time, trip_id)
                         values
-                            (%s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s)
                         returning id;
                         """,
                         [
@@ -43,6 +47,7 @@ class FlightRepository:
                             flight.arrival_location,
                             flight.departure_time,
                             flight.arrival_time,
+                            flight.trip_id
                         ]
                     )
                     id=result.fetchone()[0]
@@ -56,7 +61,7 @@ class FlightRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        select id, number, departure_location, arrival_location, departure_time, arrival_time
+                        select id, number, departure_location, arrival_location, departure_time, arrival_time, trip_id
                         from flights
                         order by number
                         """
@@ -81,6 +86,7 @@ class FlightRepository:
                             , arrival_location
                             , departure_time
                             , arrival_time
+                            , trip_id
                         from flights
                         where id = %s;
                         """,
@@ -106,6 +112,7 @@ class FlightRepository:
                             , arrival_location = %s
                             , departure_time = %s
                             , arrival_time = %s
+                            , trip_id = %s
                         where id = %s;
                         """,
                         [
@@ -114,7 +121,8 @@ class FlightRepository:
                             flight.arrival_location,
                             flight.departure_time,
                             flight.arrival_time,
-                            flight_id
+                            flight_id,
+                            flight.trip_id
                         ]
                     )
                     return self.flight_in_to_out(flight_id, flight)
@@ -153,5 +161,6 @@ class FlightRepository:
             arrival_location=record[3],
             departure_time=record[4],
             arrival_time=record[5],
+            trip_id=record[5],
 
         )
