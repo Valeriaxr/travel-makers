@@ -3,9 +3,6 @@ from typing import List, Optional
 from queries.hotels import HotelIn, HotelOut, HotelRepository, Error
 
 
-
-
-
 router = APIRouter()
 
 
