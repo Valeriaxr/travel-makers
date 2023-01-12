@@ -13,7 +13,6 @@ class HotelIn(BaseModel):
     city: str
     longitude: float
     latitude: float
-    trip_id: int
 
 
 class HotelOut(BaseModel):
@@ -23,11 +22,10 @@ class HotelOut(BaseModel):
     city: str
     longitude: float
     latitude: float
-    trip: TripOut
 
 
 class HotelRepository:
-    def create_hotel(self, hotel: HotelIn) -> HotelOut:
+    def create_hotel(self, hotel: HotelIn, trip: TripOut) -> HotelOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -45,17 +43,16 @@ class HotelRepository:
                             hotel.city,
                             hotel.longitude,
                             hotel.latitude,
-                            hotel.trip_id
+                            trip.id
                         ]
                     )
-                    hotel["trip_id"] = hotel["trip"]["id"]
                     id=result.fetchone()[0]
                     return self.hotel_in_to_out(id, hotel)
         except Exception:
             return {"message": "create did not work"}
 
 
-    def get_hotels(self) -> Error | List[HotelOut]:
+    def get_hotels(self, trip: TripOut) -> Error | List[HotelOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -63,8 +60,10 @@ class HotelRepository:
                         """
                         select id, hotel_name, address, city, longitude, latitude, trip_id
                         from hotels
-                        order by city, hotel_name
-                        """
+                        where trip_id = %s
+                        order by hotel_name
+                        """,
+                        [trip.id]
                     )
                     return [
                         self.record_to_hotel_out(record)
@@ -74,7 +73,7 @@ class HotelRepository:
             print(e)
             return {"message": "could not get all hotels"}
 
-    def get_hotel(self, hotel_id: int) -> Optional[HotelOut]:
+    def get_hotel(self, hotel_id: int, trip: TripOut) -> Optional[HotelOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -88,9 +87,9 @@ class HotelRepository:
                             , latitude
                             , trip_id
                         from hotels
-                        where id = %s;
+                        where id = %s and trip_id = %s;
                         """,
-                        [hotel_id]
+                        [hotel_id, trip.id]
                     )
                     record=result.fetchone()
                     if record is None:
@@ -100,7 +99,7 @@ class HotelRepository:
             print(e)
             return {"message": "could not get that hotel"}
 
-    def update_hotel(self, hotel_id: int, hotel: HotelIn) -> HotelOut | Error:
+    def update_hotel(self, hotel_id: int, hotel: HotelIn, trip: TripOut) -> HotelOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -112,8 +111,7 @@ class HotelRepository:
                             , city = %s
                             , longitude = %s
                             , latitude = %s
-                            , trip_id = %s
-                        where id = %s;
+                        where id = %s and trip_id = %s;
                         """,
                         [
                             hotel.hotel_name,
@@ -121,8 +119,8 @@ class HotelRepository:
                             hotel.city,
                             hotel.longitude,
                             hotel.latitude,
-                            hotel.trip_id,
-                            hotel_id
+                            hotel_id,
+                            trip.id
                         ]
                     )
                     return self.hotel_in_to_out(hotel_id, hotel)
@@ -130,16 +128,16 @@ class HotelRepository:
             print(e)
             return {"message": "could not update that hotel"}
 
-    def delete_hotel(self, hotel_id: int) -> bool:
+    def delete_hotel(self, hotel_id: int, trip: TripOut) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         delete from hotels
-                        where id = %s;
+                        where id = %s and trip_id = %s;
                         """,
-                        [hotel_id]
+                        [hotel_id, trip.id]
                     )
                     return True
         except Exception as e:
