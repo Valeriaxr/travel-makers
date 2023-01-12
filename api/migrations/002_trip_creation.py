@@ -9,7 +9,6 @@ steps = [
             start_date DATE,
             end_date DATE,
             num_people INTEGER,
-            activities INTEGER REFERENCES activities("id") ON DELETE SET NULL,
             user_id INTEGER REFERENCES accounts("id") ON DELETE CASCADE NOT NULL
         );
         """,
