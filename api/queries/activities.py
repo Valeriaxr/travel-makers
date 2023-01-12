@@ -15,7 +15,7 @@ class ActivityIn(BaseModel):
     rating: float
     picture_url: str
     hotel_distance: float
-    trip_id: int
+
 
 class ActivityOut(BaseModel):
     id: int
@@ -26,10 +26,10 @@ class ActivityOut(BaseModel):
     rating: float
     picture_url: str
     hotel_distance: float
-    trip: TripOut
+
 
 class ActivityRepository:
-    def create_activity(self, activity:ActivityIn)-> ActivityOut:
+    def create_activity(self, activity:ActivityIn, trip: TripOut)-> ActivityOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -49,12 +49,14 @@ class ActivityRepository:
                             activity.rating,
                             activity.picture_url,
                             activity.hotel_distance,
-                            activity.trip_id
+                            trip.id
+
                         ]
                     )
                     id=result.fetchone()[0]
                     return self.activity_in_to_out(id, activity)
-        except Exception:
+        except Exception as e:
+            print(e)
             return {"message": "create did not work"}
 
     def get_activities(self)-> Error | List[ActivityOut]:

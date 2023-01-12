@@ -6,18 +6,25 @@ from queries.activities import (
     ActivityOut,
     ActivityRepository
 )
+from queries.trips import TripRepository
 
 
 router = APIRouter()
 
 
-@router.post("/activities", response_model=Union[ActivityOut, Error] )
+@router.post("/api/trips/{trip_id}/activities", response_model=Union[ActivityOut, Error] )
 def create_activity(
     activity: ActivityIn,
+    trip_id: int,
     response: Response,
-   repo: ActivityRepository = Depends(),
+    trip_repo: TripRepository = Depends(),
+    activity_repo: ActivityRepository = Depends(),
 ):
-    return repo.create_activity(activity)
+    trip = trip_repo.get_trip(trip_id)
+    if trip is None:
+        response.status_code=404
+    else:
+        return activity_repo.create_activity(activity, trip)
 
 
 @router.get('/api/activities', response_model=List[ActivityOut] | Error)
