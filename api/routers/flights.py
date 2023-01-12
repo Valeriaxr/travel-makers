@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, Optional, List
+from typing import Optional, List
 from queries.flights import (
     Error,
     FlightIn,
@@ -12,7 +12,7 @@ from queries.trips import TripRepository
 router = APIRouter()
 
 
-@router.post("/api/trips/{trip_id}/flights", response_model=Union[FlightOut, Error] )
+@router.post("/api/trips/{trip_id}/flights", response_model=FlightOut| Error)
 def create_flight(
     flight: FlightIn,
     trip_id: int,
