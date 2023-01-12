@@ -50,7 +50,6 @@ class ActivityRepository:
                             activity.picture_url,
                             activity.hotel_distance,
                             trip.id
-
                         ]
                     )
                     id=result.fetchone()[0]
