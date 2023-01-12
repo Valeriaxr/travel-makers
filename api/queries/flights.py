@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from datetime import date
+from datetime import datetime
 from typing import List, Optional
 from queries.trips import TripOut
 
@@ -13,23 +13,22 @@ class FlightIn(BaseModel):
     number: str
     departure_location: str
     arrival_location: str
-    departure_time: date
-    arrival_time: date
-    trip_id: int
+    departure_time: datetime
+    arrival_time: datetime
 
 
 
 class FlightOut(BaseModel):
     id: int
+    number: str
     departure_location: str
     arrival_location: str
-    departure_time: date
-    arrival_time: date
-    trip: TripOut
+    departure_time: datetime
+    arrival_time: datetime
 
 
 class FlightRepository:
-    def create_flight(self, flight:FlightIn)-> FlightOut:
+    def create_flight(self, flight:FlightIn, trip: TripOut)-> FlightOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -47,24 +46,27 @@ class FlightRepository:
                             flight.arrival_location,
                             flight.departure_time,
                             flight.arrival_time,
-                            flight.trip_id
+                            trip.id
                         ]
                     )
                     id=result.fetchone()[0]
                     return self.flight_in_to_out(id, flight)
-        except Exception:
+        except Exception as e:
+            print(e)
             return {"message": "create did not work"}
 
-    def get_flights(self)-> Error | List[FlightOut]:
+    def get_flights(self, trip: TripOut)-> Error | List[FlightOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         select id, number, departure_location, arrival_location, departure_time, arrival_time, trip_id
                         from flights
-                        order by number
-                        """
+                        where trip_id = %s
+                        order by departure_time;
+                        """,
+                        [trip.id]
                     )
                     return[
                         self.record_to_flight_out(record)
@@ -74,7 +76,7 @@ class FlightRepository:
             print(e)
             return{"message": "could not get all flights"}
 
-    def get_flight(self, flight_id: int) -> Optional[FlightOut]:
+    def get_flight(self, flight_id: int, trip: TripOut) -> Optional[FlightOut] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -88,9 +90,9 @@ class FlightRepository:
                             , arrival_time
                             , trip_id
                         from flights
-                        where id = %s;
+                        where id = %s and trip_id = %s;
                         """,
-                        [flight_id]
+                        [flight_id, trip.id]
                     )
                     record=result.fetchone()
                     if record is None:
@@ -100,7 +102,7 @@ class FlightRepository:
             print(e)
             return {"message": "could not get that flight"}
 
-    def update_flight(self, flight_id: int, flight: FlightIn) -> FlightOut | Error:
+    def update_flight(self, flight_id: int, flight: FlightIn, trip: TripOut) -> FlightOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -112,8 +114,7 @@ class FlightRepository:
                             , arrival_location = %s
                             , departure_time = %s
                             , arrival_time = %s
-                            , trip_id = %s
-                        where id = %s;
+                        where id = %s and trip_id = %s;
                         """,
                         [
                             flight.number,
@@ -122,7 +123,7 @@ class FlightRepository:
                             flight.departure_time,
                             flight.arrival_time,
                             flight_id,
-                            flight.trip_id
+                            trip.id
                         ]
                     )
                     return self.flight_in_to_out(flight_id, flight)
@@ -131,16 +132,16 @@ class FlightRepository:
             return {"message": "could not update that flight"}
 
 
-    def delete_flight(self, flight_id: int) -> bool:
+    def delete_flight(self, flight_id: int, trip: TripOut) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         delete from flights
-                        where id = %s;
+                        where id = %s and trip_id=%s;
                         """,
-                        [flight_id]
+                        [flight_id, trip.id]
                     )
                     return True
         except Exception as e:

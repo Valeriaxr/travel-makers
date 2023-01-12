@@ -12,7 +12,7 @@ class HotelIn(BaseModel):
     address: str
     city: str
     longitude: float
-    latitude: float 
+    latitude: float
     trip_id: int
 
 
@@ -22,7 +22,7 @@ class HotelOut(BaseModel):
     address: str
     city: str
     longitude: float
-    latitude: float 
+    latitude: float
     trip: TripOut
 
 
@@ -33,9 +33,9 @@ class HotelRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        insert into hotels 
+                        insert into hotels
                             (hotel_name, address, city, longitude, latitude, trip_id)
-                        values 
+                        values
                             (%s, %s, %s, %s, %s, %s)
                         returning id;
                         """,
@@ -48,6 +48,7 @@ class HotelRepository:
                             hotel.trip_id
                         ]
                     )
+                    hotel["trip_id"] = hotel["trip"]["id"]
                     id=result.fetchone()[0]
                     return self.hotel_in_to_out(id, hotel)
         except Exception:
@@ -112,7 +113,7 @@ class HotelRepository:
                             , longitude = %s
                             , latitude = %s
                             , trip_id = %s
-                        where id = %s; 
+                        where id = %s;
                         """,
                         [
                             hotel.hotel_name,
@@ -144,7 +145,7 @@ class HotelRepository:
         except Exception as e:
             print(e)
             return False
-                    
+
 
     def hotel_in_to_out(self, id:int, hotel:HotelIn):
         old_data=hotel.dict()
@@ -160,4 +161,3 @@ class HotelRepository:
             latitude=record[5],
             trip_id=record[6],
         )
-    
