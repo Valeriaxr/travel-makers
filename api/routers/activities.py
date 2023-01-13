@@ -27,36 +27,63 @@ def create_activity(
         return activity_repo.create_activity(activity, trip)
 
 
-@router.get('/api/activities', response_model=List[ActivityOut] | Error)
-def get_activities(repo: ActivityRepository=Depends()):
-    return repo.get_activities()
+@router.get('/api/trips/{trip_id}/activities', response_model=List[ActivityOut] | Error)
+def get_activities(
+    trip_id:int,
+    response: Response,
+    trip_repo: TripRepository=Depends(),
+    activity_repo: ActivityRepository=Depends()
+):
+    trip = trip_repo.get_trip(trip_id)
+    if trip is None:
+        response.status_code=404
+    else:
+        return activity_repo.get_activities(trip)
 
 
-@router.get('/api/activities/{activity.id}', response_model = Optional[ActivityOut])
+@router.get('/api/trips/{trip_id}/activities/{activity.id}', response_model = Optional[ActivityOut])
 def get_activity(
     activity_id: int,
+    trip_id:int,
     response: Response,
-    repo: ActivityRepository=Depends(),
+    activity_repo: ActivityRepository=Depends(),
+    trip_repo: TripRepository=Depends(),
 
 ) -> ActivityOut:
-    activity=repo.get_activity(activity_id)
-    if activity is None:
+    trip = trip_repo.get_trip(trip_id)
+    if trip is None:
         response.status_code=404
-    return activity
+    else:
+        return activity_repo.get_activity(activity_id, trip)
 
 
 
-@router.put('/api/activities/{activity.id}', response_model = ActivityOut | Error)
+@router.put('/api/trips/{trip_id}/activities/{activity.id}', response_model = ActivityOut | Error)
 def update_activity(
     activity_id: int,
+    trip_id: int,
     activity: ActivityIn,
-    repo: ActivityRepository=Depends(),
-)-> ActivityOut | Error:
-    return repo.update_activity(activity_id, activity)
+    response: Response,
+    trip_repo: TripRepository=Depends(),
+    activity_repo: ActivityRepository=Depends(),
 
-@router.delete('/api/activities/{activity.id}', response_model = bool)
+)-> ActivityOut | Error:
+    trip = trip_repo.get_trip(trip_id)
+    if trip is None:
+        response.status_code=404
+    else:
+        return activity_repo.update_activity(activity_id, activity, trip)
+
+@router.delete('/api/trips/{trip_id}/activities/{activity.id}', response_model = bool)
 def delete_activity(
     activity_id: int,
-    repo: ActivityRepository=Depends(),
+    trip_id: int,
+    response: Response,
+    trip_repo: TripRepository=Depends(),
+    activity_repo: ActivityRepository=Depends(),
 ) -> bool:
-    return repo.delete_activity(activity_id)
+    trip = trip_repo.get_trip(trip_id)
+    if trip is None:
+        response.status_code=404
+    else:
+        return activity_repo.delete_activity(activity_id, trip)

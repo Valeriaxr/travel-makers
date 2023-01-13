@@ -58,7 +58,7 @@ class ActivityRepository:
             print(e)
             return {"message": "create did not work"}
 
-    def get_activities(self)-> Error | List[ActivityOut]:
+    def get_activities(self, trip: TripOut)-> Error | List[ActivityOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -66,8 +66,10 @@ class ActivityRepository:
                         """
                         select id, activity_name, activity_address, longitude, latitude, rating, picture_url, hotel_distance, trip_id
                         from activities
+                        where trip_id = %s
                         order by activity_name
-                        """
+                        """,
+                        [trip.id]
                     )
                     return[
                         self.record_to_activity_out(record)
@@ -77,7 +79,7 @@ class ActivityRepository:
             print(e)
             return{"message": "could not get all activities"}
 
-    def get_activity(self, activity_id: int) -> Optional[ActivityOut]:
+    def get_activity(self, activity_id: int, trip: TripOut) -> Optional[ActivityOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -93,9 +95,9 @@ class ActivityRepository:
                             , hotel_distance
                             , trip_id
                         from activities
-                        where id = %s;
+                        where id = %s and trip_id = %s;
                         """,
-                        [activity_id]
+                        [activity_id, trip.id]
                     )
                     record=result.fetchone()
                     if record is None:
@@ -105,7 +107,7 @@ class ActivityRepository:
             print(e)
             return {"message": "could not get that activity"}
 
-    def update_activity(self, activity_id: int, activity: ActivityIn) -> ActivityOut | Error:
+    def update_activity(self, activity_id: int, activity: ActivityIn, trip: TripOut) -> ActivityOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -119,8 +121,7 @@ class ActivityRepository:
                             , rating = %s
                             , picture_url = %s
                             , hotel_distance = %s
-                            , trip_id
-                        where id = %s;
+                        where id = %s and trip_id = %s;
                         """,
                         [
                             activity.activity_name,
@@ -131,7 +132,7 @@ class ActivityRepository:
                             activity.picture_url,
                             activity.hotel_distance,
                             activity_id,
-                            activity.trip_id
+                            trip.id
                         ]
                     )
                     return self.activity_in_to_out(activity_id, activity)
@@ -140,16 +141,16 @@ class ActivityRepository:
             return {"message": "could not update that activity"}
 
 
-    def delete_activity(self, activity_id: int) -> bool:
+    def delete_activity(self, activity_id: int, trip: TripOut) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         delete from activities
-                        where id = %s;
+                        where id = %s and trip_id=%s;
                         """,
-                        [activity_id]
+                        [activity_id, trip.id]
                     )
                     return True
         except Exception as e:
