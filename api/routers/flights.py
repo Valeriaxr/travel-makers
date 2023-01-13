@@ -7,6 +7,7 @@ from queries.flights import (
     FlightOut,
 )
 from queries.trips import TripRepository
+from authenticator import authenticator
 
 
 router = APIRouter()
@@ -17,10 +18,11 @@ def create_flight(
     flight: FlightIn,
     trip_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository = Depends(),
     flight_repo: FlightRepository = Depends(),
 ):
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -31,10 +33,11 @@ def create_flight(
 def get_flights(
     trip_id:int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository=Depends(),
     flight_repo: FlightRepository=Depends()
 ):
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -46,11 +49,12 @@ def get_flight(
     flight_id: int,
     trip_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository=Depends(),
     flight_repo: FlightRepository=Depends(),
 
 ) -> FlightOut:
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -64,10 +68,11 @@ def update_flight(
     trip_id: int,
     flight: FlightIn,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository=Depends(),
     flight_repo: FlightRepository=Depends(),
 )-> FlightOut | Error:
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -78,10 +83,11 @@ def delete_flight(
     flight_id: int,
     trip_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository=Depends(),
     flight_repo: FlightRepository=Depends(),
 ) -> bool:
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:

@@ -54,7 +54,7 @@ class TripRepository:
             print(e)
             return {"message": "create did not work"}
 
-    def get_trip(self, trip_id: int):
+    def get_trip(self, trip_id: int, user_id: int):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -67,9 +67,9 @@ class TripRepository:
                         , end_date
                         , num_people
                         from trips
-                        where id = %s
+                        where id = %s and user_id = %s;
                         """,
-                        [trip_id]
+                        [trip_id, user_id]
                     )
                     record = result.fetchone()
                     print(record)
@@ -79,6 +79,75 @@ class TripRepository:
         except Exception as e:
             print(e)
             return {"message": "could not get that trip"}
+
+    def get_trips(self, user_id: int) -> Error | List[TripOut]:
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as db:
+                        db.execute(
+                            """
+                            select id, trip_name, destination, start_date, end_date, num_people
+                            from trips
+                            where user_id = %s
+                            order by start_date
+                            """,
+                            [user_id]
+                        )
+                        return [
+                            self.record_to_trip_out(record)
+                            for record in db
+                        ]
+            except Exception as e:
+                print(e)
+                return {"message": "could not get all trips"}
+
+
+    def update_trip(self, trip_id: int, trip: TripIn, user_id: int) -> TripOut | Error:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        update trips
+                        set trip_name = %s
+                            , destination = %s
+                            , start_date = %s
+                            , end_date = %s
+                            , num_people = %s
+                        where id = %s and user_id = %s;
+                        """,
+                        [
+                            trip.trip_name,
+                            trip.destination,
+                            trip.start_date,
+                            trip.end_date,
+                            trip.num_people,
+                            trip_id,
+                            user_id
+                        ]
+                    )
+                    return self.trip_in_to_out(trip_id, trip)
+        except Exception as e:
+            print(e)
+            return {"message": "could not update that trip"}
+
+    def delete_trip(self, trip_id: int, user_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        delete from trips
+                        where id = %s and user_id = %s;
+                        """,
+                        [trip_id, user_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+
+
 
     def trip_in_to_out(self, id:int, trip:TripIn):
         old_data=trip.dict()

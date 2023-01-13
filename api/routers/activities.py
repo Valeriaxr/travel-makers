@@ -7,6 +7,7 @@ from queries.activities import (
     ActivityRepository
 )
 from queries.trips import TripRepository
+from authenticator import authenticator
 
 
 router = APIRouter()
@@ -17,10 +18,11 @@ def create_activity(
     activity: ActivityIn,
     trip_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository = Depends(),
     activity_repo: ActivityRepository = Depends(),
 ):
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -31,10 +33,11 @@ def create_activity(
 def get_activities(
     trip_id:int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository=Depends(),
     activity_repo: ActivityRepository=Depends()
 ):
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -46,11 +49,12 @@ def get_activity(
     activity_id: int,
     trip_id:int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     activity_repo: ActivityRepository=Depends(),
     trip_repo: TripRepository=Depends(),
 
 ) -> ActivityOut:
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -64,11 +68,12 @@ def update_activity(
     trip_id: int,
     activity: ActivityIn,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository=Depends(),
     activity_repo: ActivityRepository=Depends(),
 
 )-> ActivityOut | Error:
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
@@ -79,10 +84,11 @@ def delete_activity(
     activity_id: int,
     trip_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     trip_repo: TripRepository=Depends(),
     activity_repo: ActivityRepository=Depends(),
 ) -> bool:
-    trip = trip_repo.get_trip(trip_id)
+    trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404
     else:
