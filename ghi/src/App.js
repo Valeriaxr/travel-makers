@@ -4,6 +4,7 @@
 import MainPage from './MainPage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+import AccountsSignup from './AccountsSignup'
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -33,6 +34,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<MainPage />} />
+        <Route path='/signup' element={<AccountsSignup />} />
       </Routes>
     </BrowserRouter>
     // <div>

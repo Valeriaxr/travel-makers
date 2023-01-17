@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useCreateAccountMutation } from './store/accountsApi';
+import ErrorNotification from "./ErrorNotification";
+
 
 function Signup() {
     const navigate = useNavigate();
@@ -14,7 +16,7 @@ function Signup() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createAccount({email, password, first, last});
+        createAccount({email, password, first_name: first, last_name: last});
     }
 
     if (result.isSuccess) {
@@ -24,7 +26,7 @@ function Signup() {
     }
 
     return (
-        <div className="container">
+    <div className="container">
       <div className="columns is-centered">
         <div className="column is-one-third">
           <ErrorNotification error={error} />
