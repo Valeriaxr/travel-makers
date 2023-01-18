@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { accountsApi } from './accountsApi';
 import { tripsApi } from './tripsApi';
-// import { flightsApi } from './flightsApi';
+import { flightsApi } from './flightsApi';
 import { hotelsApi } from './hotelsApi';
 // import { activitiesApi } from './activitiesApi';
 
@@ -10,7 +10,7 @@ export const store = configureStore({
   reducer: {
     [accountsApi.reducerPath]: accountsApi.reducer,
     [tripsApi.reducerPath]: tripsApi.reducer,
-    // [flightsApi.reducerPath]: flightsApi.reducer,
+    [flightsApi.reducerPath]: flightsApi.reducer,
     [hotelsApi.reducerPath]: hotelsApi.reducer,
     // [activitiesApi.reducerPath]: activitiesApi.reducer,
   },
@@ -18,7 +18,7 @@ export const store = configureStore({
     getDefaultMiddleware()
     //   .concat(activitiesApi.middleware)
     .concat(hotelsApi.middleware)
-    //   .concat(flightsApi.middleware)
+    .concat(flightsApi.middleware)
       .concat(tripsApi.middleware)
       .concat(accountsApi.middleware),
 });

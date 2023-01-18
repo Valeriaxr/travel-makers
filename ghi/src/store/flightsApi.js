@@ -6,11 +6,11 @@ export const flightsApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_TRAVEL_MAKERS,
     }),
-    tagTypes: ['FlightsList'],
+    tagTypes: ['Flights'],
     endpoints: builder => ({
         getFlights: builder.query({
             query: () => '/api/flights/',
-            providesTags: ['FlightsList'],
+            providesTags: ['Flights'],
         }),
         createFlight: builder.mutation({
             query: data => ({
@@ -20,7 +20,7 @@ export const flightsApi = createApi({
                 // makes Api call and creates new owner
 
             }),
-            invalidatesTags: ['FlightsList'],
+            invalidatesTags: ['Flights'],
         }),
     }),
 });
