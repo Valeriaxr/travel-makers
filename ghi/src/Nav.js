@@ -21,6 +21,9 @@ function Nav() {
               <NavLink className="nav-link" to="/trips/new">Create a trip!</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/trips/new">Activities</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/trips">Your Trips!</NavLink>
             </li>
             <li className="nav-item">
