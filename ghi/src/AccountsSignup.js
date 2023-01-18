@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
-import { useCreateAccountMutation } from './store/apiSlice';
+import { useSignUpMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
 
 
@@ -12,7 +12,7 @@ function Signup() {
     const [first, setFirst] = useState('');
     const [last, setLast] = useState('');
     const [error, setError] = useState('');
-    const [createAccount, result] = useCreateAccountMutation();
+    const [createAccount, result] = useSignUpMutation();
 
     async function handleSubmit(e) {
         e.preventDefault();

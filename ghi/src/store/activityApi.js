@@ -1,31 +1,33 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 
 
-export const hotelsApi = createApi({
-    reducerPath: 'hotels',
+
+
+export const activityApi = createApi({
+    reducerPath: 'activities',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_TRAVEL_MAKERS,
     }),
-    tagTypes: ['HotelsList'],
+    tagTypes: ['ActivityList'],
     endpoints: builder => ({
         getHotels: builder.query({
-            query: tripId => `/api/trips/${tripId}/hotels`,
-            providesTags: ['HotelsList'],
+            query: () => '/api/activities/',
+            providesTags: ['ActivityList'],
         }),
         createHotel: builder.mutation({
             query: data => ({
-                url: '/api/hotels',
+                url: '/api/activities',
                 body: data,
                 method: 'post',
                 // makes Api call and creates new owner
 
             }),
-            invalidatesTags: ['HotelsList'],
+            invalidatesTags: ['ActivityList'],
         }),
     }),
 });
 
 export const {
-    useGetHotelsQuery,
-    useCreateHotelMutation,
- } = hotelsApi;
+    useGetActivityQuery,
+    useCreateActivityMutation,
+ } = activityApi;

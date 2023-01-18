@@ -1,26 +1,30 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
-import { useCreateHotelMutation } from './store/hotelsApi';
+import { useCreateActivityMutation } from './store/activityApi';
 import ErrorNotification from './ErrorNotification';
 
-function HotelForm() {
-    const navigate= useNavigate();
-    const [hotel, setHotel]= useState('');
+
+function ActivityForm() {
+    const navigate=useNavigate();
+    const[activity, setActivity] =useNavigate();
     const [address, setAddress]= useState('');
-    const [city, setCity]= useState('');
     const [longitude, setLongitude]= useState('');
     const [latitude, setLatitude]= useState('');
+    const [rating, setRating]= useState('');
+    const [picture, setPicture]= useState('');
+    const [distance, setDistance]= useState('');
     const [error, setError]= useState('');
-    const [createHotel, result] = useCreateHotelMutation();
+    const [createActivity, result] = useCreateActivityMutation();
+}
 
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createHotel({ hotel, address, city, longitude, latitude});
+        create({ activity, address, rating, longitude, latitude});
     }
     if (result.isSuccess) {
-        navigate("/hotels");
+        navigate("/activities");
     } else if (result.isError) {
         setError(result.error);
     }
@@ -32,23 +36,35 @@ return (
           <ErrorNotification error={error} />
           <form onSubmit={handleSubmit}>
           <BulmaInput
-              label="Hotel name"
-              id="hotel"
-              placeholder="Marriot"
-              value={hotel}
-              onChange={setHotel} />
+              label="Activity name"
+              id="activity"
+              placeholder="diving"
+              value={activity}
+              onChange={setActivity} />
             <BulmaInput
-              label="Hotel Address"
+              label="Activity Address"
               id="address"
               placeholder="1234 Lane Street"
               value={address}
               onChange={setAddress} />
             <BulmaInput
-              label="City"
-              id="city"
-              placeholder="example@example.com"
-              value={city}
-              onChange={setCity} />
+              label="Activity Rating"
+              id="rating"
+              placeholder="5 stars!"
+              value={rating}
+              onChange={setRating} />
+            <BulmaInput
+              label="Activity Picture"
+              id="picture"
+              placeholder="picture"
+              value={picture}
+              onChange={setPicture} />
+            <BulmaInput
+              label="Hotel Distance"
+              id="distance"
+              placeholder="3 miles"
+              value={distance}
+              onChange={setDistance} />
             <BulmaInput
               label="Longitude"
               id="longitude"
@@ -69,6 +85,5 @@ return (
       </div>
     </div>
     )
-}
 
-export default HotelForm;
+export default ActivityForm;
