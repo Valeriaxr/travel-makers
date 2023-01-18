@@ -5,6 +5,11 @@ import MainPage from './MainPage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import AccountsSignup from './AccountsSignup'
+import Nav from './Nav';
+
+
+
+
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -32,10 +37,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/signup' element={<AccountsSignup />} />
-      </Routes>
+      <Nav />
+      <div className="container">
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/signup' element={<AccountsSignup />} />
+        </Routes>
+      </div>
     </BrowserRouter>
     // <div>
     //   {/* <ErrorNotification error={error} /> */}
