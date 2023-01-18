@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { apiSlice } from './apiSlice';
-// import { tripsApi } from './tripsApi';
+import { accountsApi } from './accountsApi';
+import { tripsApi } from './tripsApi';
 // import { flightsApi } from './flightsApi';
 import { hotelsApi } from './hotelsApi';
 // import { activitiesApi } from './activitiesApi';
 
 export const store = configureStore({
   reducer: {
-    // [apiSlice.reducerPath]: apiSlice.reducer,
-    // [tripsApi.reducerPath]: tripsApi.reducer,
+    [accountsApi.reducerPath]: accountsApi.reducer,
+    [tripsApi.reducerPath]: tripsApi.reducer,
     // [flightsApi.reducerPath]: flightsApi.reducer,
     [hotelsApi.reducerPath]: hotelsApi.reducer,
     // [activitiesApi.reducerPath]: activitiesApi.reducer,
@@ -19,8 +19,8 @@ export const store = configureStore({
     //   .concat(activitiesApi.middleware)
     .concat(hotelsApi.middleware)
     //   .concat(flightsApi.middleware)
-    //   .concat(tripsApi.middleware)
-      .concat(apiSlice.middleware),
+      .concat(tripsApi.middleware)
+      .concat(accountsApi.middleware),
 });
 
 setupListeners(store.dispatch);
