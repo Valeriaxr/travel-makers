@@ -25,4 +25,4 @@ export const apiSlice = createApi({
 export const {
     useGetAccountsQuery,
     useCreateAccountMutation,
-} = accountsApi;
+} = apiSlice;
