@@ -5,6 +5,7 @@ import MainPage from './MainPage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import AccountsSignup from './AccountsSignup'
+import AccountsLogin from './AccountsLogin'
 import Nav from './Nav';
 
 
@@ -42,6 +43,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/signup' element={<AccountsSignup />} />
+          <Route path='/login' element={<AccountsLogin />} />
         </Routes>
       </div>
     </BrowserRouter>
