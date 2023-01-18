@@ -5,6 +5,7 @@ import MainPage from './MainPage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import AccountsSignup from './AccountsSignup'
+import AccountsLogin from './AccountsLogin'
 import Nav from './Nav';
 import FlightsForm from './FlightsForm.js';
 import HotelForm from './HotelsForm.js';
@@ -44,6 +45,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/signup' element={<AccountsSignup />} />
+          <Route path='/login' element={<AccountsLogin />} />
           <Route path='/flights' element={<FlightsForm />} />
           <Route path='/hotels' element={<HotelForm />} />
         </Routes>
