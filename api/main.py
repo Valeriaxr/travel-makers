@@ -15,7 +15,6 @@ app.include_router(accounts.router)
 app.include_router(activities.router)
 app.include_router(trips.router)
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
