@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import AccountsSignup from './AccountsSignup'
 import Nav from './Nav';
+import FlightsForm from './FlightsForm.js';
+import HotelForm from './HotelsForm.js';
 
 
 
@@ -42,6 +44,8 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/signup' element={<AccountsSignup />} />
+          <Route path='/flights' element={<FlightsForm />} />
+          <Route path='/hotels' element={<HotelForm />} />
         </Routes>
       </div>
     </BrowserRouter>

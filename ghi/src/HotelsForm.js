@@ -13,7 +13,7 @@ function HotelForm() {
     const [latitude, setLatitude]= useState('');
     const [error, setError]= useState('');
     const [createHotel, result] = useCreateHotelMutation();
-}
+
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -48,7 +48,7 @@ return (
               id="city"
               placeholder="example@example.com"
               value={city}
-              onChange={setCityl} />
+              onChange={setCity} />
             <BulmaInput
               label="Longitude"
               id="longitude"
@@ -69,5 +69,6 @@ return (
       </div>
     </div>
     )
+}
 
 export default HotelForm;

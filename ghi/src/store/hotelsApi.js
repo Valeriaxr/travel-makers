@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 
 
-
-
 export const hotelsApi = createApi({
     reducerPath: 'hotels',
     baseQuery: fetchBaseQuery({
@@ -11,7 +9,7 @@ export const hotelsApi = createApi({
     tagTypes: ['HotelsList'],
     endpoints: builder => ({
         getHotels: builder.query({
-            query: () => '/api/hotels/',
+            query: tripId => `/api/trips/${tripId}/hotels`,
             providesTags: ['HotelsList'],
         }),
         createHotel: builder.mutation({
