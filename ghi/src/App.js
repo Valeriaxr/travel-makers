@@ -10,6 +10,8 @@ import Nav from './Nav';
 import FlightsForm from './FlightsForm.js';
 import HotelForm from './HotelsForm.js';
 import ActivityForm from './ActivityForm.js';
+import TripForm from './TripsForm.js';
+import TripList from './TripsList.js';
 
 
 
@@ -49,7 +51,11 @@ function App() {
           <Route path='/login' element={<AccountsLogin />} />
           <Route path='/flights' element={<FlightsForm />} />
           <Route path='/hotels' element={<HotelForm />} />
-          <Route path='/activities' elements={<ActivityForm />} />
+          <Route path='/activities' element={<ActivityForm />} />
+          <Route path='/trips'>
+            <Route path='' element={<TripList />} />
+            <Route path='/new' element={<TripForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -19,11 +19,11 @@ function Signup() {
         createAccount({email, password, first_name: first, last_name: last});
     }
 
-    // if (result.isSuccess) {
-    //     navigate("/login");
-    // } else if (result.isError) {
-    //     setError(result.error);
-    // }
+    if (result.isSuccess) {
+        navigate("/login");
+    } else if (result.isError) {
+        setError(result.error);
+    }
 
     return (
     <div className="container">
