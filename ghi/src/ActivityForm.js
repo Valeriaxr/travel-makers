@@ -18,9 +18,10 @@ function ActivityForm() {
     const [createActivity, result] = useCreateActivityMutation();
 
 
+
     async function handleSubmit(e) {
         e.preventDefault();
-        create({ activity, address, rating, longitude, latitude});
+        createActivity({ activity, address, rating, longitude, latitude, picture, distance});
     }
     if (result.isSuccess) {
         navigate("/activities");
@@ -59,7 +60,7 @@ return (
               value={picture}
               onChange={setPicture} />
             <BulmaInput
-              label="Hotel Distance"
+              label="Distance from"
               id="distance"
               placeholder="3 miles"
               value={distance}
