@@ -74,4 +74,4 @@ function TripForm() {
     )
 }
 
-export default TripForm
+export default TripForm;

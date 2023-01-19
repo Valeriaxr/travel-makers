@@ -53,9 +53,9 @@ function App() {
           <Route path='/flights' element={<FlightsForm />} />
           <Route path='/hotels' element={<HotelForm />} />
           <Route path='/activities' element={<ActivityForm />} />
-          <Route path='/trips'>
+          <Route path='trips'>
             <Route path='' element={<TripList />} />
-            <Route path='/new' element={<TripForm />} />
+            <Route path='new' element={<TripForm />} />
           </Route>
         </Routes>
       </div>
