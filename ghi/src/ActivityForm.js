@@ -16,7 +16,7 @@ function ActivityForm() {
     const [distance, setDistance]= useState('');
     const [error, setError]= useState('');
     const [createActivity, result] = useCreateActivityMutation();
-}
+
 
 
     async function handleSubmit(e) {
@@ -85,5 +85,5 @@ return (
       </div>
     </div>
     )
-
+}
 export default ActivityForm;
