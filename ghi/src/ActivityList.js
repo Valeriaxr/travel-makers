@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import ErrorNotification from "./ErrorNotification";
-import { useGetActivityQuery } from './store/activityApi';
+import { useGetActivityQuery } from './store/activitiesApi';
 
 
 function ActivityList() {
@@ -17,9 +17,13 @@ function ActivityList() {
             <div className="column is-narrow">
                 <ErrorNotification error={error} />
                 <div className="field has-text-right">
-                    <Link to="/activity/new" className="button">Add Activity</Link>
+                    <Link to="/activities/new" className="button">Add Activity</Link>
                 </div>
             </div>
         </div>
     )
 }
+
+
+
+export default ActivityList;

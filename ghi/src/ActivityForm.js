@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
-import { useCreateActivityMutation } from './store/activityApi';
+import { useCreateActivityMutation } from './store/activitiesApi';
 import ErrorNotification from './ErrorNotification';
 
 
