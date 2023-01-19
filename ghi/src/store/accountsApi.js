@@ -87,5 +87,3 @@ export const {
     useLogOutMutation,
     useSignUpMutation,
 } = accountsApi;
-console.log(useSignUpMutation)
-debugger

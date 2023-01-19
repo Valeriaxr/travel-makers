@@ -23,3 +23,5 @@ function HotelList() {
         </div>
     )
 }
+
+export default HotelList;
