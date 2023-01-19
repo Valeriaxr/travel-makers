@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
-import { useCreateActivityMutation } from './store/activityApi';
+import { useCreateActivityMutation } from './store/activitiesApi';
 import ErrorNotification from './ErrorNotification';
 
 
@@ -16,7 +16,7 @@ function ActivityForm() {
     const [distance, setDistance]= useState('');
     const [error, setError]= useState('');
     const [createActivity, result] = useCreateActivityMutation();
-}
+
 
 
     async function handleSubmit(e) {
@@ -85,5 +85,5 @@ return (
       </div>
     </div>
     )
-
+}
 export default ActivityForm;

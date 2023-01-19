@@ -3,18 +3,18 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 
 
 
-export const activityApi = createApi({
+export const activitiesApi = createApi({
     reducerPath: 'activities',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_TRAVEL_MAKERS,
     }),
     tagTypes: ['ActivityList'],
     endpoints: builder => ({
-        getHotels: builder.query({
+        getActivities: builder.query({
             query: () => '/api/activities/',
             providesTags: ['ActivityList'],
         }),
-        createHotel: builder.mutation({
+        createActivity: builder.mutation({
             query: data => ({
                 url: '/api/activities',
                 body: data,
@@ -30,4 +30,4 @@ export const activityApi = createApi({
 export const {
     useGetActivityQuery,
     useCreateActivityMutation,
- } = activityApi;
+ } = activitiesApi;
