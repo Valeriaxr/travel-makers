@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { accountsApi } from './accountsApi';
 
 export const hotelsApi = createApi({
@@ -14,21 +14,35 @@ export const hotelsApi = createApi({
             return headers;
         }
     }),
-    tagTypes: ['HotelsList'],
+    tagTypes: ['Hotels'],
     endpoints: builder => ({
         getHotels: builder.query({
-            query: tripId => `/api/trips/${tripId}/hotels`,
-            providesTags: ['HotelsList'],
+            query: (tripId) => `/api/trips/${tripId}/hotels`,
+            providesTags: data => {
+                const tags = [{type: 'Hotels', id: 'LIST'}];
+                if (!data || !data.hotels) return tags;
+
+                const { hotels } = data;
+                if (hotels) {
+                    tags.concat(...hotels.map(({ id }) => ({type: 'Hotels', id})));
+                }
+                return tags;
+            }
         }),
         createHotel: builder.mutation({
-            query: data => ({
-                url: '/api/hotels',
-                body: data,
-                method: 'post',
+            query: (form, tripId) => {
+                const formData = new FormData(form);
+                const entries = Array.from(formData.entries());
+                const data = entries.reduce((acc, [key, value]) => {acc[key] = Number.parseInt(value) || value; return acc;}, {});
+                return {
+                    method: 'post',
+                    url: `/api/trips/${tripId}/hotels`,
+                    credentials: 'include',
+                    body: data,
+                }
                 // makes Api call and creates new owner
-
-            }),
-            invalidatesTags: ['HotelsList'],
+            },
+            invalidatesTags: ['Hotels'],
         }),
     }),
 });

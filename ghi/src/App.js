@@ -5,11 +5,14 @@ import MainPage from './MainPage.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import AccountsSignup from './AccountsSignup'
-import AccountsLogin from './AccountsLogin'
+import Login from './AccountsLogin'
 import Nav from './Nav';
 import FlightsForm from './FlightsForm.js';
 import HotelForm from './HotelsForm.js';
 import ActivityForm from './ActivityForm.js';
+import TripForm from './TripsForm.js';
+import TripList from './TripsList.js';
+
 
 
 
@@ -46,10 +49,14 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/signup' element={<AccountsSignup />} />
-          <Route path='/login' element={<AccountsLogin />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/flights' element={<FlightsForm />} />
           <Route path='/hotels' element={<HotelForm />} />
-          <Route path='/activities' elements={<ActivityForm />} />
+          <Route path='/activities' element={<ActivityForm />} />
+          <Route path='trips'>
+            <Route path='' element={<TripList />} />
+            <Route path='new' element={<TripForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
