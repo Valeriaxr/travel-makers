@@ -37,11 +37,12 @@ export const accountsApi = createApi({
         logIn: builder.mutation({
             query: info => {
                 let formData = null;
+                console.log(info)
                 if (info instanceof HTMLElement) {
                     formData = new FormData(info);
                 } else {
                     formData = new FormData();
-                    formData.append('email', info.email);
+                    formData.append('username', info.email);
                     formData.append('password', info.password);
                 }
                 return {
