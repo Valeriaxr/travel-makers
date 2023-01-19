@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BulmaInput from './BulmaInput';
-// import { useCreateFlightMutation } from './store/flightsApi';
 import ErrorNotification from './ErrorNotification';
 import { useCreateFlightMutation } from './store/flightsApi';
+import BulmaInput from './BulmaInput';
 
 function FlightsForm() {
-    const navigate= useNavigate();
+    const navigate = useNavigate();
     const [number, setNumber]= useState('');
     const [departure, setDeparture]= useState('');
     const [arrival, setArrival]= useState('');
@@ -14,20 +13,16 @@ function FlightsForm() {
     const [arrivalt, setArrivalt]= useState('');
     const [error, setError]= useState('');
     const [createFlight, result] = useCreateFlightMutation();
-    console.log(useCreateFlightMutation)
-    debugger
-    // const [createFlight, result] = useCreateFlightMutation();
-
 
     async function handleSubmit(e) {
         e.preventDefault();
         createFlight({ number, departure_location: departure, arrival_location: arrival, depature_time: depaturet, arrival_time: arrivalt});
     }
-    // if (result.isSuccess) {
-        // navigate("/flights");
-    // } else if (result.isError) {
-        // setError(result.error);
-    // }
+    if (result.isSuccess) {
+        navigate("/flights");
+    } else if (result.isError) {
+        setError(result.error);
+    }
 
 return (
     <div className="container">
