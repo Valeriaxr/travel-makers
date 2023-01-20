@@ -1,25 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 function TripColumn(props) {
   return (
     <div className="col">
       {props.list.map(data => {
-        const trip = data.trip;
+        // const trip = data;
         return (
-          <div key={trip.href} className="card mb-3 shadow">
+          <div key={data.href} className="card mb-3 shadow">
+            <Link className='' to={`/trips/${data.id}`}>
             {/* <img src={conference.location.picture_url} className="card-img-top" /> */}
             <div className="card-body">
-              <h5 className="card-title">{trip.trip_name}</h5>
+              <h5 className="card-title">{data.trip_name}</h5>
               <h6 className="card-subtitle mb-2 text-muted">
-                {trip.destination}
+                {data.destination}
               </h6>
             </div>
             <div className="card-footer">
-              {new Date(trip.start_date).toLocaleDateString()}
+              {new Date(data.start_date).toLocaleDateString()}
               -
-              {new Date(trip.end_date).toLocaleDateString()}
+              {new Date(data.end_date).toLocaleDateString()}
             </div>
+            </Link>
           </div>
         );
       })}
@@ -36,20 +38,32 @@ class TripList extends React.Component {
   }
 
   async componentDidMount() {
-    const url = 'http://localhost:8000/api/trips/';
+    const url = `${process.env.REACT_APP_TRAVEL_MAKERS}/api/trips/`;
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: 'get',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       if (response.ok) {
         // Get the list of conferences
         const data = await response.json();
-
+        console.log('data', data)
         // Create a list of for all the requests and
         // add all of the requests to it
         const requests = [];
-        for (let trip of data.trips) {
-          const detailUrl = `http://localhost:8000${trip.href}`;
-          requests.push(fetch(detailUrl));
+        for (let trip of data) {
+          const detailUrl = `${process.env.REACT_APP_TRAVEL_MAKERS}/api/trips/${trip.id}`;
+          requests.push(fetch(detailUrl, {
+            method: 'get',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }));
         }
 
         // Wait for all of the requests to finish
