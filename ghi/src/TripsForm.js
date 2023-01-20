@@ -20,11 +20,11 @@ function TripForm() {
         createTrip({trip_name: name, destination, start_date: start, end_date: end, num_people: people});
     }
 
-    // if (result.isSuccess) {
-    //     navigate("/login");
-    // } else if (result.isError) {
-    //     setError(result.error);
-    // }
+    if (result.isSuccess) {
+        navigate("/trips");
+    } else if (result.isError) {
+        setError(result.error);
+    }
 
     return (
     <div className="container">

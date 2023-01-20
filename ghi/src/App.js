@@ -12,6 +12,7 @@ import HotelForm from './HotelsForm.js';
 import ActivityForm from './ActivityForm.js';
 import TripForm from './TripsForm.js';
 import TripList from './TripsList.js';
+import TripDetail from './TripDetail.js';
 
 
 
@@ -56,6 +57,7 @@ function App() {
           <Route path='trips'>
             <Route path='' element={<TripList />} />
             <Route path='new' element={<TripForm />} />
+            <Route path=':tripId' element={<TripDetail />} />
           </Route>
         </Routes>
       </div>

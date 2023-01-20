@@ -18,10 +18,7 @@ export const tripsApi = createApi({
     tagTypes: ['Trips'],
     endpoints: builder => ({
         addTrip: builder.mutation({
-            query: form => {
-                const formData = new FormData(form);
-                const entries = Array.from(formData.entries());
-                const data = entries.reduce((acc, [key, value]) => {acc[key] = Number.parseInt(value) || value; return acc;}, {});
+            query: data => {
                 return {
                     method: 'post',
                     url: '/api/trips',
@@ -32,7 +29,13 @@ export const tripsApi = createApi({
             invalidatesTags: [{type: 'Trips', id: 'LIST'}],
         }),
         getTrips: builder.query({
-            query: () => `/api/trips`,
+            query: trips => {
+                return {
+                    url: `/api/trips`,
+                    credentials: 'include',
+                    body: trips,
+                }
+            },
             providesTags: data => {
                 const tags = [{type: 'Trips', id: 'LIST'}];
                 if (!data || !data.trips) return tags;
