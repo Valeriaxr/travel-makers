@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useCreateFlightMutation } from './store/flightsApi';
@@ -18,11 +18,11 @@ function FlightsForm() {
         e.preventDefault();
         createFlight({ number, departure_location: departure, arrival_location: arrival, depature_time: depaturet, arrival_time: arrivalt});
     }
-    if (result.isSuccess) {
-        navigate("/flights");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+        if (result.isSuccess) {
+            navigate("/flights");
+        }
+    }, [result, navigate]);
 
 return (
     <div className="container">
@@ -61,7 +61,7 @@ return (
             value={arrivalt}
             onChange={setArrivalt} />
             <div className="field">
-              <button className="button is-primary">Save</button>
+              <button className="button is-primary">create</button>
             </div>
           </form>
         </div>
