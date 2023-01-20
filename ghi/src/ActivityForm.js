@@ -20,7 +20,7 @@ function ActivityForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createActivity({ activity, address, rating, longitude, latitude, picture, distance});
+        createActivity({ activity_name: activity, activity_address: address, longitude, latitude, rating, picture_url: picture, hotel_distance: distance});
     }
     if (result.isSuccess) {
         navigate("/activities");
@@ -35,17 +35,29 @@ return (
           <ErrorNotification error={error} />
           <form onSubmit={handleSubmit}>
           <BulmaInput
-              label="Activity name"
+              label="Activity"
               id="activity"
               placeholder="diving"
               value={activity}
               onChange={setActivity} />
             <BulmaInput
-              label="Activity Address"
+              label="Address"
               id="address"
               placeholder="1234 Lane Street"
               value={address}
               onChange={setAddress} />
+            <BulmaInput
+              label="Longitude"
+              id="longitude"
+              placeholder="12.2"
+              value={longitude}
+              onChange={setLongitude} />
+            <BulmaInput
+              label="Latitude"
+              id="latitude"
+              placeholder="12.4"
+              value={latitude}
+              onChange={setLatitude} />
             <BulmaInput
               label="Activity Rating"
               id="rating"
@@ -64,18 +76,6 @@ return (
               placeholder="3 miles"
               value={distance}
               onChange={setDistance} />
-            <BulmaInput
-              label="Longitude"
-              id="longitude"
-              placeholder="12.2"
-              value={longitude}
-              onChange={setLongitude} />
-            <BulmaInput
-            label="Latitude"
-            id="latitude"
-            placeholder="12.4"
-            value={latitude}
-            onChange={setLatitude} />
             <div className="field">
               <button className="button is-primary">Save</button>
             </div>
