@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-export const flightsAPi = createApi({
+export const flightsApi = createApi({
     reducerPath: 'flights',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_TRAVEL_MAKERS,
@@ -24,4 +24,4 @@ export const flightsAPi = createApi({
 export const {
     useGetFlightsQuery,
     useCreateFlightMutation,
-} = flightsAPi;
+} = flightsApi;

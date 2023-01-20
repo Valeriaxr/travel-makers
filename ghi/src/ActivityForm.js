@@ -18,7 +18,6 @@ function ActivityForm() {
     const [createActivity, result] = useCreateActivityMutation();
 
 
-
     async function handleSubmit(e) {
         e.preventDefault();
         createActivity({ activity, address, rating, longitude, latitude, picture, distance});
