@@ -52,7 +52,9 @@ function App() {
           <Route path='/' element={<MainPage />} />
           <Route path='/signup' element={<AccountsSignup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/flights' element={<FlightsForm />} />
+          <Route path='flights'>
+              <Route path='new' element={<FlightsForm />} />
+          </Route>
           <Route path='/hotels' element={<HotelForm />} />
           <Route path='activities'>
             <Route path='' element={<ActivityList />} />
