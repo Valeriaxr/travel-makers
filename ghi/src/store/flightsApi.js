@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { accountsApi } from "./accountsApi";
 
+
 export const flightsApi = createApi({
     reducerPath: 'flights',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_TRAVEL_MAKERS,
-         prepareHeaders: (headers, { getState }) => {
+        prepareHeaders: (headers, { getState }) => {
             const selector = accountsApi.endpoints.getToken.select();
             const { data: tokenData } = selector(getState());
             if (tokenData && tokenData.access_token) {
@@ -19,8 +20,8 @@ export const flightsApi = createApi({
             query: () => '/api/flights'
         }),
         createFlight: builder.mutation({
-            query: data => ({
-                url: '/api/flights',
+            query: (data, id) => ({
+                url: `/api/trips/${id}/flights`,
                 body: data,
                 method: 'post',
                 credentials: 'include',

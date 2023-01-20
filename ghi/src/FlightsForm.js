@@ -1,26 +1,28 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ErrorNotification from './ErrorNotification';
 import { useCreateFlightMutation } from './store/flightsApi';
 import BulmaInput from './BulmaInput';
 
 function FlightsForm() {
+    let {tripId} = useParams();
     const navigate = useNavigate();
     const [number, setNumber]= useState('');
     const [departure, setDeparture]= useState('');
     const [arrival, setArrival]= useState('');
-    const [depaturet, setDeparturet]= useState('');
+    const [departuret, setDeparturet]= useState('');
     const [arrivalt, setArrivalt]= useState('');
+    // const [tripId, setTripId] = useState('');
     const [error, setError]= useState('');
     const [createFlight, result] = useCreateFlightMutation();
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createFlight({ number, departure_location: departure, arrival_location: arrival, depature_time: depaturet, arrival_time: arrivalt});
+        createFlight({ number, departure_location: departure, arrival_location: arrival, departure_time: departuret, arrival_time: arrivalt}, tripId);
     }
     useEffect(() => {
         if (result.isSuccess) {
-            navigate("/flights");
+            navigate(`/trips/${tripId}`);
         }
     }, [result, navigate]);
 
@@ -52,7 +54,7 @@ return (
               label="Departure Time"
               id="departuret"
               placeholder="1212"
-              value={depaturet}
+              value={departuret}
               onChange={setDeparturet} />
             <BulmaInput
             label="Arrival Time"

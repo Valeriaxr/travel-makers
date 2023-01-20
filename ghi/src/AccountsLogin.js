@@ -1,22 +1,29 @@
 import { useState } from "react";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useLogInMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
 
 function Login() {
-   const [email, setEmail] = useState('');
-   const [password, setPassword] = useState('');
-   const [error, setError] = useState('');
-   const [logIn, result] = useLogInMutation();
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [logIn, result] = useLogInMutation();
 
 
-   async function handleSubmit(e) {
+    async function handleSubmit(e) {
        e.preventDefault();
        logIn({email, password});
    }
 
-   return (
+    if (result.isSuccess) {
+        navigate("/trips");
+    } else if (result.isError) {
+        setError(result.error);
+    }
+
+    return (
        <div className="container">
            <div className="columns is-centered">
                <div className="column is-one-third">
@@ -42,7 +49,7 @@ function Login() {
                </div>
            </div>
        </div>
-   );
+    );
 }
 
 export default Login

@@ -32,8 +32,8 @@ function TripDetail() {
                 <h3>{trip.start_date}-{trip.end_date}</h3>
                 <h4>{trip.num_people} people are joining you in this trip</h4>
             </div>
-
-            <button className='button is-primary'onClick={() => {navigate("/flights")}}>Add a flight</button>
+            <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/flights/new`)}}>Add a flight</button>
+            <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/activities/new`)}}>Add an activity</button>
         </div>
     );
 };

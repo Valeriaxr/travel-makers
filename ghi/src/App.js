@@ -18,7 +18,6 @@ import TripDetail from './TripDetail.js';
 
 
 
-
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);
@@ -51,15 +50,20 @@ function App() {
           <Route path='/' element={<MainPage />} />
           <Route path='/signup' element={<AccountsSignup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='flights'>
-              <Route path='new' element={<FlightsForm />} />
-          </Route>
           <Route path='/hotels' element={<HotelForm />} />
-          <Route path='/activities' element={<ActivityForm />} />
           <Route path='trips'>
             <Route path='' element={<TripList />} />
             <Route path='new' element={<TripForm />} />
-            <Route path=':tripId' element={<TripDetail />} />
+            <Route path=':tripId'>
+              <Route path='' element={<TripDetail />} />
+              <Route path='flights'>
+                <Route path='new' element={<FlightsForm />} />
+              </Route>
+              <Route path='activities'>
+                <Route path='new' element={<ActivityForm />} />
+              </Route>
+            </Route>
+
           </Route>
         </Routes>
       </div>
