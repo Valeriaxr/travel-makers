@@ -17,16 +17,21 @@ export const flightsApi = createApi({
     }),
     endpoints: builder => ({
         getFlights: builder.query ({
-            query: () => '/api/flights'
+            query: ({flights, id}) => {
+                return {
+                    url: `/api/trips/${id}/flights`,
+                    credentials: 'include',
+                    body: flights,
+                }
+            }
         }),
         createFlight: builder.mutation({
-            query: (data, id) => ({
+            query: ({data, id}) => ({
                 url: `/api/trips/${id}/flights`,
                 body: data,
                 method: 'post',
                 credentials: 'include',
             }),
-
         }),
     }),
 });

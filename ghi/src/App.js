@@ -50,7 +50,6 @@ function App() {
           <Route path='/' element={<MainPage />} />
           <Route path='/signup' element={<AccountsSignup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/hotels' element={<HotelForm />} />
           <Route path='trips'>
             <Route path='' element={<TripList />} />
             <Route path='new' element={<TripForm />} />
@@ -61,6 +60,9 @@ function App() {
               </Route>
               <Route path='activities'>
                 <Route path='new' element={<ActivityForm />} />
+              </Route>
+              <Route path='hotels'>
+                <Route path='new' element={<HotelForm />} />
               </Route>
             </Route>
 

@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useCreateActivityMutation } from './store/activitiesApi';
 import ErrorNotification from './ErrorNotification';
 
 
 function ActivityForm() {
+    const {tripId} = useParams();
     const navigate=useNavigate();
-    const[activity, setActivity] =useNavigate();
+    const[activity, setActivity] =useState();
     const [address, setAddress]= useState('');
     const [longitude, setLongitude]= useState('');
     const [latitude, setLatitude]= useState('');
@@ -20,10 +21,10 @@ function ActivityForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createActivity({ activity_name: activity, activity_address: address, longitude, latitude, rating, picture_url: picture, hotel_distance: distance});
+        createActivity({data: {activity_name: activity, activity_address: address, longitude, latitude, rating, picture_url: picture, hotel_distance: distance}, id: tripId});
     }
     if (result.isSuccess) {
-        navigate("/activities");
+        navigate(`/trips/${tripId}`);
     } else if (result.isError) {
         setError(result.error);
     }

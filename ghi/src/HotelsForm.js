@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useCreateHotelMutation } from './store/hotelsApi';
 import ErrorNotification from './ErrorNotification';
 
 function HotelForm() {
+    const {tripId} = useParams();
     const navigate= useNavigate();
     const [hotel, setHotel]= useState('');
     const [address, setAddress]= useState('');
@@ -17,13 +18,13 @@ function HotelForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createHotel({ hotel, address, city, longitude, latitude});
+        createHotel({data: { hotel_name: hotel, address, city, longitude, latitude}, id: tripId});
     }
-    if (result.isSuccess) {
-        navigate("/hotels");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+        if (result.isSuccess) {
+            navigate(`/trips/${tripId}`);
+        }
+    }, [result, navigate]);
 
 return (
     <div className="container">
@@ -46,7 +47,7 @@ return (
             <BulmaInput
               label="City"
               id="city"
-              placeholder="example@example.com"
+              placeholder="New York"
               value={city}
               onChange={setCity} />
             <BulmaInput

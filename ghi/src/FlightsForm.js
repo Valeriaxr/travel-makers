@@ -5,7 +5,7 @@ import { useCreateFlightMutation } from './store/flightsApi';
 import BulmaInput from './BulmaInput';
 
 function FlightsForm() {
-    let {tripId} = useParams();
+    const {tripId} = useParams();
     const navigate = useNavigate();
     const [number, setNumber]= useState('');
     const [departure, setDeparture]= useState('');
@@ -18,7 +18,7 @@ function FlightsForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createFlight({ number, departure_location: departure, arrival_location: arrival, departure_time: departuret, arrival_time: arrivalt}, tripId);
+        createFlight({data: {number, departure_location: departure, arrival_location: arrival, departure_time: departuret, arrival_time: arrivalt}, id: tripId});
     }
     useEffect(() => {
         if (result.isSuccess) {

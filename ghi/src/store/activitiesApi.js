@@ -17,27 +17,24 @@ export const activitiesApi = createApi({
             return headers;
         }
     }),
-    tagTypes: ['ActivityList'],
     endpoints: builder => ({
         getActivities: builder.query({
             query: () => '/api/activities/',
-            providesTags: ['ActivityList'],
         }),
         createActivity: builder.mutation({
-            query: data => ({
-                url: '/api/activities',
+            query: ({data, id}) => ({
+                url: `/api/trips/${id}/activities`,
                 body: data,
                 method: 'post',
                 credentials: 'include'
                 // makes Api call and creates new owner
 
             }),
-            invalidatesTags: ['ActivityList'],
         }),
     }),
 });
 
 export const {
-    useGetActivityQuery,
+    useGetActivitiesQuery,
     useCreateActivityMutation,
  } = activitiesApi;

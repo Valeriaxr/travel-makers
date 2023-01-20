@@ -14,35 +14,17 @@ export const hotelsApi = createApi({
             return headers;
         }
     }),
-    tagTypes: ['Hotels'],
     endpoints: builder => ({
         getHotels: builder.query({
             query: (tripId) => `/api/trips/${tripId}/hotels`,
-            providesTags: data => {
-                const tags = [{type: 'Hotels', id: 'LIST'}];
-                if (!data || !data.hotels) return tags;
-
-                const { hotels } = data;
-                if (hotels) {
-                    tags.concat(...hotels.map(({ id }) => ({type: 'Hotels', id})));
-                }
-                return tags;
-            }
         }),
         createHotel: builder.mutation({
-            query: (form, tripId) => {
-                const formData = new FormData(form);
-                const entries = Array.from(formData.entries());
-                const data = entries.reduce((acc, [key, value]) => {acc[key] = Number.parseInt(value) || value; return acc;}, {});
-                return {
-                    method: 'post',
-                    url: `/api/trips/${tripId}/hotels`,
-                    credentials: 'include',
-                    body: data,
-                }
-                // makes Api call and creates new owner
-            },
-            invalidatesTags: ['Hotels'],
+            query: ({data, id}) => ({
+                url: `/api/trips/${id}/hotels`,
+                body: data,
+                method: 'post',
+                credentials: 'include',
+            }),
         }),
     }),
 });
