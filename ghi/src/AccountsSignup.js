@@ -5,6 +5,7 @@ import { useSignUpMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
 
 
+
 function Signup() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');

@@ -1,14 +1,22 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useGetFlightsQuery } from "./store/flightsApi";
+// import './vids/Fly.mp4';
+import vid1 from './vids/Hiking.mp4';
+// import vid2 from './vids/Couple.mp4';
+
+
+
 
 function TripDetail() {
     let {tripId} = useParams();
     const [trip, setTrip] = useState('');
     const [flights, setFlights] = useState([]);
     const [hotels, setHotels] = useState([]);
+    const [currentVid, setCurrentVid] = useState(0);
     const [activities, setActivities] = useState([]);
     const navigate = useNavigate();
+
 
     const getTripData = async () => {
         const url = `${process.env.REACT_APP_TRAVEL_MAKERS}/api/trips/${tripId}`;
@@ -70,14 +78,25 @@ function TripDetail() {
     }, []
     )
 
+
+
     return (
         <div>
-            <div>
-                <h1>Trip name: {trip.trip_name}</h1>
-                <h2>Destination: {trip.destination}</h2>
-                <h3>Starting: {trip.start_date}- ending: {trip.end_date}</h3>
-                <h4>{trip.num_people} people are joining you in this trip</h4>
+            <div className="box">
+            <div className="trip-deets" style={{ background: 'transparent', padding: '20px', opacity: '1.0'}}>
+                <div className="trip-name">Trip name: {trip.trip_name}</div>
+                <div className="destination">Destination: {trip.destination}</div>
+                <div className="date">Starting: {trip.start_date}- ending: {trip.end_date}</div>
+                <div className="people-joining">{trip.num_people} people are joining you in this trip</div>
             </div>
+            </div>
+
+            <div className="back-vid">
+                <video src={vid1} autoPlay loop muted
+                className="vid-cover"> </video>
+            </div>
+
+
             <div>
                 <h2>Flight info</h2>
                 <table>
