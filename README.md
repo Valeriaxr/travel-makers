@@ -1,32 +1,30 @@
-# Module3 Project Gamma
+# Travel Makers
 
-## Getting started
+## Group Members
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+Alex
+Anderson
+Valeria
+Victoria
 
-## Install Extensions
+## Design
 
-* Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-* Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+(Insert Excalidraw here)
 
-## Deliverables
+## Technologies Used
 
-* [ ] Wire-frame diagrams
-* [ ] API documentation
-* [ ] Project is deployed to Render.com/GitLab-pages
-* [ ] GitLab issue board is setup and in use
-* [ ] Journals
+* [ ] PostgreSQL
+* [ ] Javascript
+* [ ] React
+* [ ] Redux
+* [ ] Bootstrap
 
-## Project layout
+## Functionality
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+Sign Up and Login In page: Users will be able to sign up for an account, then after be redirected to our Login page.
+Create a trip: Once a user is signed in, they will be brought to the Trips List page where they can create their first trip.
+Add a Flight/Activity/Hotel: After the user creates a trip, a clickable link to the trip will appear on our Trip Details page. When the link is clicked, there are options to add a flight, activity, and hotel to the current trip the user has selected.
+Sign Out: When a user wants to sign out they will click on the tab in the navbar which will allow them to sign off from their account.
 
 ### Directories
 
@@ -96,7 +94,7 @@ deployment, but it just consists of these steps:
 * make sure this project is in a group. If it isn't, stop
   now and move it to a GitLab group
 * remove the fork relationship: In GitLab go to:
-  
+
   Settings -> General -> Advanced -> Remove fork relationship
 
 * add these GitLab CI/CD variables:

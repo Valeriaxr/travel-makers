@@ -6,6 +6,7 @@ import ErrorNotification from "./ErrorNotification";
 
 
 
+
 function Signup() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
