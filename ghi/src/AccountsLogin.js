@@ -58,13 +58,13 @@ function Login() {
                             <BulmaInput
                                 label="Password"
                                 id="password"
-                                type={passwordVisible ? "text" : "password"}
+                                type={passwordVisible ? "password" : "text"}
                                 placeholder="password"
                                 value={password}
                                 onChange={setPassword} />
                                 <label className="checkbox">
                                     <input type="checkbox" onChange={() =>
-                setPasswordVisible(!passwordVisible)} />
+                                 setPasswordVisible(!passwordVisible)} />
                                     Show Password
                                 </label>
                             <div className="field">

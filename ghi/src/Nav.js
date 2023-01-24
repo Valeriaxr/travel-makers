@@ -1,7 +1,16 @@
 import { NavLink } from "react-router-dom";
-// import { useGetHotelsQuery } from "./store/hotelsApi";
+import { useNavigate } from "react-router-dom";
+import { useLogOutMutation } from "./store/accountsApi";
 
 function Nav() {
+  const navigate = useNavigate();
+  const[logOut] = useLogOutMutation();
+
+  async function handleLogOut(e) {
+    e.preventDefault();
+    logOut();
+    navigate('/')
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-transparent">
       <div className="container-fluid">
@@ -26,10 +35,10 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/login">Login</NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/logout">Log Out!</NavLink>
-            </li>
           </ul>
+          <div>
+            <button className="button btn-danger" onClick={handleLogOut}>Logout</button>
+          </div>
         </div>
       </div>
     </nav>
