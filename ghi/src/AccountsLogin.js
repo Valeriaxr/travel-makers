@@ -29,7 +29,6 @@ function Login() {
 
     return (
         <div>
-        <h1>Login</h1>
             <div className="container" style={{
             display: "flex", 
             alignItems: "center", 
@@ -38,10 +37,10 @@ function Login() {
             top: "40%",
             left: "50%",
             transform: "translate(-50%, -40%)",
-            backgroundColor: "tan",
-            border: "1.0px solid black",
-            width: "18%",
-            height: "15%",
+            backgroundColor: "#d3c6a3",
+            border: "1.75px solid black",
+            width: "17%",
+            height: "17%",
 
         }}>
                 <div className="columns is-centered">
@@ -68,7 +67,7 @@ function Login() {
                                     Show Password
                                 </label>
                             <div className="field">
-                                <button className="button is-primary">Save</button>
+                                <button className="button is-primary">Login!</button>
                             </div>
                         </form>
                     </div>
