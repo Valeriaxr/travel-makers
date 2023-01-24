@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useLogInMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
+import { NavLink } from "react-router-dom";
 
 function Login() {
     const navigate = useNavigate();
@@ -13,8 +14,7 @@ function Login() {
     const [logIn, result] = useLogInMutation();
 
 
-
-
+    
 
     async function handleSubmit(e) {
        e.preventDefault();
@@ -40,7 +40,7 @@ function Login() {
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
             width: "17%",
-            height: "17%",
+            height: "15%",
 
         }}>
                 <div className="columns is-centered">
@@ -67,7 +67,7 @@ function Login() {
                                     Show Password
                                 </label>
                             <div className="field">
-                                <button className="button is-primary">Login!</button>
+                                <button className="btn btn-dark">Login!</button>
                             </div>
                         </form>
                     </div>
