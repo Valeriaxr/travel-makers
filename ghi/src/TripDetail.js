@@ -43,6 +43,7 @@ function TripDetail() {
         const data=await response.json();
         setFlights(data)
     }
+    
 
     const getHotelData = async () => {
         const url = `${process.env.REACT_APP_TRAVEL_MAKERS}/api/trips/${tripId}/hotels/`;
@@ -91,10 +92,10 @@ function TripDetail() {
             </div>
             </div>
 
-            <div className="back-vid">
+            {/* <div className="back-vid">
                 <video src={vid1} autoPlay loop muted
                 className="vid-cover"> </video>
-            </div>
+            </div> */}
 
 
             <div>

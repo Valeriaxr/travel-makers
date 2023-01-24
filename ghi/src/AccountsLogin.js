@@ -28,36 +28,52 @@ function Login() {
     }
 
     return (
-       <div className="container">
-           <div className="columns is-centered">
-               <div className="column is-one-third">
-                   <ErrorNotification error={error} />
-                   <form onSubmit={handleSubmit}>
-                       <BulmaInput
-                           label="Email"
-                           id="email"
-                           type="email"
-                           placeholder="example@example.com"
-                           value={email}
-                           onChange={setEmail} />
-                       <BulmaInput
-                           label="Password"
-                           id="password"
-                           type={passwordVisible ? "text" : "password"}
-                           placeholder="password"
-                           value={password}
-                           onChange={setPassword} />
-                        <label className="checkbox">
-                            <input type="checkbox" onChange={() =>
-           setPasswordVisible(!passwordVisible)} />
-                            Show Password
-                           </label>
-                       <div className="field">
-                           <button className="button is-primary">Save</button>
-                       </div>
-                   </form>
-               </div>
-           </div>
+        <div>
+        <h1>Login</h1>
+            <div className="container" style={{
+            display: "flex", 
+            alignItems: "center", 
+            justifyContent: "center",
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%, -40%)",
+            backgroundColor: "tan",
+            border: "1.0px solid black",
+            width: "18%",
+            height: "15%",
+
+        }}>
+                <div className="columns is-centered">
+                    <div className="column is-one-third">
+                        <ErrorNotification error={error} />
+                        <form onSubmit={handleSubmit}>
+                            <BulmaInput
+                                label="Email"
+                                id="email"
+                                type="email"
+                                placeholder="example@example.com"
+                                value={email}
+                                onChange={setEmail} />
+                            <BulmaInput
+                                label="Password"
+                                id="password"
+                                type={passwordVisible ? "text" : "password"}
+                                placeholder="password"
+                                value={password}
+                                onChange={setPassword} />
+                                <label className="checkbox">
+                                    <input type="checkbox" onChange={() =>
+                setPasswordVisible(!passwordVisible)} />
+                                    Show Password
+                                </label>
+                            <div className="field">
+                                <button className="button is-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
        </div>
     );
 }
