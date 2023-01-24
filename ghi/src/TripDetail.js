@@ -83,7 +83,7 @@ function TripDetail() {
     return (
         <div>
             <div className="box">
-            <div className="trip-deets" style={{ background: 'transparent', padding: '20px', opacity: '1.0'}}>
+            <div className="trip-deets" style={{ background: 'white', padding: '20px', opacity: '1.0'}}>
                 <div className="trip-name">Trip name: {trip.trip_name}</div>
                 <div className="destination">Destination: {trip.destination}</div>
                 <div className="date">Starting: {trip.start_date}- ending: {trip.end_date}</div>
@@ -98,6 +98,7 @@ function TripDetail() {
 
 
             <div>
+                <div className="box-two">
                 <h2>Flight info</h2>
                 <table>
                     <thead>
@@ -126,6 +127,7 @@ function TripDetail() {
                 <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/flights/new`)}}>Add a flight</button>
             </div>
             <div>
+                <div className="box-three">
                 <h2>Hotel info</h2>
                 <table>
                     <thead>
@@ -154,6 +156,7 @@ function TripDetail() {
                 <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/hotels/new`)}}>Add a hotel</button>
             </div>
             <div>
+                <div className="box-four">
                 <h2>Activity info</h2>
                 <table>
                     <thead>
@@ -185,6 +188,9 @@ function TripDetail() {
                  </table>
                 <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/activities/new`)}}>Add an activity</button>
             </div>
+        </div>
+        </div>
+        </div>
         </div>
     );
 };

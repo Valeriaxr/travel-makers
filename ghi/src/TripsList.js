@@ -103,8 +103,9 @@ class TripList extends React.Component {
   render() {
     return (
       <>
-        <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
-          <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
+      <div className="tm-box" style={{width: '75%', height: '30%'}}>
+        <div className="px-4 py-5 my-5 mt-0 text-center" style={{backgroundColor: 'white'}}>
+          <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" style={{filter: 'white(100%)'}} />
           <h1 className="display-5 fw-bold">Travel Makers</h1>
           <div className="col-lg-6 mx-auto">
             <p className="lead mb-4">
@@ -112,6 +113,7 @@ class TripList extends React.Component {
             </p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <Link to="/trips/new" className="btn btn-primary btn-lg px-4 gap-3">Create a trip</Link>
+            </div>
             </div>
           </div>
         </div>
