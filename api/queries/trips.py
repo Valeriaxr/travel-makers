@@ -72,7 +72,6 @@ class TripRepository:
                         [trip_id, user_id]
                     )
                     record = result.fetchone()
-                    print(record)
                     if record is None:
                         return None
                     return self.record_to_trip_out(record)
@@ -147,8 +146,6 @@ class TripRepository:
             print(e)
             return False
 
-
-
     def trip_in_to_out(self, id:int, trip:TripIn):
         old_data=trip.dict()
         return TripOut(id=id, **old_data)
@@ -162,59 +159,3 @@ class TripRepository:
             end_date=record[4],
             num_people=record[5]
         )
-
-    # def trip_record_to_dict(self, record, description):
-    #     trip = None
-    #     if record is not None:
-    #         trip = {}
-    #         trip_fields = [
-    #             "trip_id",
-    #             "trip_name",
-    #             "destination",
-    #             "start_date",
-    #             "end_date",
-    #             "num_people",
-    #         ]
-    #         for i, column in enumerate(description):
-    #             if column.name in trip_fields:
-    #                 trip[column.name] = record[i]
-    #         trip["id"] = trip["trip_id"]
-            # account = {}
-            # account_fields = [
-            #     "user_id",
-            # ]
-            # for i, column in enumerate(description):
-            #     if column.name in account_fields:
-            #         account[column.name] = record[i]
-            # account["id"] = account["user_id"]
-
-            # flight = {}
-            # flight_fields = [
-            #     "flight_id",
-            #     "number",
-            # ]
-            # for i, column in enumerate(description):
-            #     if column.name in flight_fields:
-            #         flight[column.name] = record[i]
-            # flight["id"] = flight["flight_id"]
-
-            # hotel = {}
-            # hotel_fields = [
-            #     "hotel_id",
-            #     "hotel_name",
-            # ]
-            # for i, column in enumerate(description):
-            #     if column.name in hotel_fields:
-            #         hotel[column.name] = record[i]
-            # hotel["id"] = hotel["hotel_id"]
-
-            # activity = {}
-            # activity_fields = [
-            #     "activity_id",
-            #     "activity_name",
-            # ]
-            # for i, column in enumerate(description):
-            #     if column.name in activity_fields:
-            #         activity[column.name] = record[i]
-            # activity["id"] = activity["activity_id"]
-        return trip

@@ -15,7 +15,6 @@ function HotelForm() {
     const [error, setError]= useState('');
     const [createHotel, result] = useCreateHotelMutation();
 
-
     async function handleSubmit(e) {
         e.preventDefault();
         createHotel({data: { hotel_name: hotel, address, city, longitude, latitude}, id: tripId});
