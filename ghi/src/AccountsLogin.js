@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useLogInMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
+import { NavLink } from "react-router-dom";
 
 function Login() {
     const navigate = useNavigate();
@@ -63,7 +64,7 @@ function Login() {
                                     Show Password
                                 </label>
                             <div className="field">
-                                <button className="button is-primary">Login!</button>
+                                <button className="btn btn-dark">Login!</button>
                             </div>
                         </form>
                     </div>

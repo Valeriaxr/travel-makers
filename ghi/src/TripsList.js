@@ -3,11 +3,11 @@ import { Link} from 'react-router-dom';
 
 function TripColumn(props) {
   return (
-    <div className="col">
+    <div className="col" >
       {props.list.map(data => {
         // const trip = data;
         return (
-          <div key={data.href} className="card mb-3 shadow">
+          <div key={data.href} className="card mb-3 shadow" style={{backgroundColor: '#FAECD6'}}>
             <Link className='' to={`/trips/${data.id}`}>
             {/* <img src={conference.location.picture_url} className="card-img-top" /> */}
             <div className="card-body">
@@ -103,16 +103,16 @@ class TripList extends React.Component {
   render() {
     return (
       <>
-      <div className="tm-box" style={{width: '75%', height: '30%'}}>
-        <div className="px-4 py-5 my-5 mt-0 text-center" style={{backgroundColor: 'white'}}>
+      <div className="tm-box" style={{width: '30%', height: '30%', margin: '0 auto'}}>
+        <div className="px-4 py-5 my-5 mt-0 text-center" style={{backgroundColor: '#FAECD6'}}>
           <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" style={{filter: 'white(100%)'}} />
           <h1 className="display-5 fw-bold">Travel Makers</h1>
           <div className="col-lg-6 mx-auto">
             <p className="lead mb-4">
-              Unravel your travel!
+              Ready to unravel your dream trip?
             </p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/trips/new" className="btn btn-primary btn-lg px-4 gap-3">Create a trip</Link>
+              <Link to="/trips/new" className="btn btn-dark btn-lg px-4 gap-3">Create a trip</Link>
             </div>
             </div>
           </div>
