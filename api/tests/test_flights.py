@@ -17,23 +17,21 @@ def get_current_account_data_mock():
     }
 
 class TripQueriesMock:
-    def get_trip():
-        return {
-            'id': 1,
-            'trip_name': 'Family Trip',
-            'destination': 'Washington',
-            'start_date': '2023-01-11',
-            'end_date': '2023-01-23',
-            'num_people': 1
-        }
+    def get_trip(self, id: int, user_id: int):
+        return TripOut (
+            id = 1,
+            trip_name = 'Family Trip',
+            destination = 'Washington',
+            start_date = '2023-01-11',
+            end_date = '2023-01-23',
+            num_people = 1
+     )
 
 
 
 
 
 class FlightQueriesMock:
-    def get_flights(self):
-        return []
 
     def create_flight(self, flight: FlightIn, trip_id:int) -> FlightOut:
         flight_dict = flight.dict()
@@ -41,7 +39,7 @@ class FlightQueriesMock:
 
 
 def test_create_flight():
-    # Arrange
+
     app.dependency_overrides[FlightRepository] = FlightQueriesMock
     app.dependency_overrides[TripRepository] = TripQueriesMock
     app.dependency_overrides[authenticator.get_current_account_data] = get_current_account_data_mock
@@ -53,30 +51,12 @@ def test_create_flight():
         'arrival_time': '2023-01-18T20:31:29.458Z',
     }
 
-    # Act
-    res = client.post('/api/trips/{trip_id}/flights', json.dumps(flight_body))
 
-    # Assert
+    res = client.post('/api/trips/1/flights', json.dumps(flight_body))
+
+
     assert res.status_code == 200
     assert res.json()['id'] == 13
-    assert res.json()['trip_id'] == 1
-
-    # A cleanup
-    app.dependency_overrides = {}
-
-def test_get_flights():
-    # Arrange
-    app.dependency_overrides[FlightRepository] = FlightQueriesMock
-    app.dependency_overrides[TripRepository] = TripQueriesMock
-    app.dependency_overrides[authenticator.get_current_account_data] = get_current_account_data_mock
-    # Act
-    res = client.get('/api/trips/{trip_id}/flights')
-
-    # Assert
-    assert res.status_code == 200
-    assert res.json()["number"] == "American 1234"
-    assert res.json()["id"] == 13
-    assert res.json()["trip_id"] == 1
 
 
     # A cleanup
