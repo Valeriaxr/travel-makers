@@ -4,21 +4,20 @@ import ErrorNotification from './ErrorNotification';
 import { useCreateFlightMutation } from './store/flightsApi';
 import BulmaInput from './BulmaInput';
 
-function FlightsForm() {
+function FlightForm() {
     const {tripId} = useParams();
     const navigate = useNavigate();
     const [number, setNumber]= useState('');
     const [departure, setDeparture]= useState('');
     const [arrival, setArrival]= useState('');
-    const [departuret, setDeparturet]= useState('');
-    const [arrivalt, setArrivalt]= useState('');
-    // const [tripId, setTripId] = useState('');
+    const [departureTime, setDepartureTime]= useState('');
+    const [arrivalTime, setArrivalTime]= useState('');
     const [error, setError]= useState('');
     const [createFlight, result] = useCreateFlightMutation();
 
     async function handleSubmit(e) {
         e.preventDefault();
-        createFlight({data: {number, departure_location: departure, arrival_location: arrival, departure_time: departuret, arrival_time: arrivalt}, id: tripId});
+        createFlight({data: {number, departure_location: departure, arrival_location: arrival, departure_time: departureTime, arrival_time: arrivalTime}, id: tripId});
     }
     useEffect(() => {
         if (result.isSuccess) {
@@ -52,16 +51,16 @@ return (
               onChange={setArrival} />
             <BulmaInput
               label="Departure Time"
-              id="departuret"
+              id="departureTime"
               placeholder="1212"
-              value={departuret}
-              onChange={setDeparturet} />
+              value={departureTime}
+              onChange={setDepartureTime} />
             <BulmaInput
-            label="Arrival Time"
-            id="arrivalt"
-            placeholder="121212"
-            value={arrivalt}
-            onChange={setArrivalt} />
+              label="Arrival Time"
+              id="arrivalTime"
+              placeholder="121212"
+              value={arrivalTime}
+              onChange={setArrivalTime} />
             <div className="field">
               <button className="button is-primary">create</button>
             </div>
@@ -72,4 +71,4 @@ return (
     )
 }
 
-export default FlightsForm;
+export default FlightForm;

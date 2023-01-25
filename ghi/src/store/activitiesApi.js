@@ -27,8 +27,6 @@ export const activitiesApi = createApi({
                 body: data,
                 method: 'post',
                 credentials: 'include'
-                // makes Api call and creates new owner
-
             }),
         }),
     }),

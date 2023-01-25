@@ -17,7 +17,6 @@ class FlightIn(BaseModel):
     arrival_time: datetime
 
 
-
 class FlightOut(BaseModel):
     id: int
     number: str
@@ -131,7 +130,6 @@ class FlightRepository:
             print(e)
             return {"message": "could not update that flight"}
 
-
     def delete_flight(self, flight_id: int, trip: TripOut) -> bool:
         try:
             with pool.connection() as conn:
@@ -147,8 +145,6 @@ class FlightRepository:
         except Exception as e:
             print(e)
             return False
-
-
 
     def flight_in_to_out(self, id:int, flight:FlightIn):
         old_data=flight.dict()
