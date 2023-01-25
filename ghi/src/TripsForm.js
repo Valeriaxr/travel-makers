@@ -37,7 +37,7 @@ function TripForm() {
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: "17%",
+            width: "15%",
             height: "25%",
 
         }}>
