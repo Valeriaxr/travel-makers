@@ -106,13 +106,13 @@ class FlightsList extends React.Component {
           <h1 className="display-5 fw-bold">Travel Makers</h1>
           <div className="col-lg-6 mx-auto">
             <p className="lead mb-4">
-              Unravel your travel!
             </p>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <Link to="/trips/new" className="btn btn-primary btn-lg px-4 gap-3">Create a trip</Link>
             </div>
           </div>
         </div>
+
         <div className="container">
           <h2>Upcoming trips</h2>
           <div className="row">

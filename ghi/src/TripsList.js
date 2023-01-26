@@ -7,7 +7,7 @@ function TripColumn(props) {
       {props.list.map(data => {
         // const trip = data;
         return (
-          <div key={data.href} className="card mb-3 shadow" style={{backgroundColor: '#FAECD6'}}>
+          <div key={data.id} className="card mb-3 shadow" style={{backgroundColor: '#FAECD6'}}>
             <Link className='' to={`/trips/${data.id}`}>
             {/* <img src={conference.location.picture_url} className="card-img-top" /> */}
             <div className="card-body">
@@ -122,10 +122,10 @@ class TripList extends React.Component {
           <div className="row">
             {this.state.tripColumns.map((tripList, index) => {
               return (
-                <TripColumn key={index} list={tripList} />
+                <TripColumn key={index} list={tripList} className="listie" />
               );
             })}
-          </div>
+        </div>
         </div>
       </>
     );
