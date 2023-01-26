@@ -37,8 +37,8 @@ function Login() {
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: "17%",
-            height: "17%",
+            width: "250px",
+            height: "225px",
             }}>
                 <div className="columns is-centered">
                     <div className="column is-one-third">

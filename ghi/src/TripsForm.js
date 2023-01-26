@@ -37,8 +37,8 @@ function TripForm() {
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: "15%",
-            height: "25%",
+            width: '250px',
+            height: "365px",
 
         }}>
       <div className="columns is-centered">
@@ -48,13 +48,13 @@ function TripForm() {
           <BulmaInput
               label="Trip name"
               id="name"
-              placeholder="Family Trip"
+              placeholder="Summer Trip"
               value={name}
               onChange={setName} />
             <BulmaInput
               label="Destination"
               id="destination"
-              placeholder="Guadalajara"
+              placeholder="Hawaii"
               value={destination}
               onChange={setDestination} />
             <BulmaInput
@@ -74,11 +74,11 @@ function TripForm() {
             <BulmaInput
               label="Number of people"
               id="people"
-              placeholder="5"
+              placeholder="2"
               value={people}
               onChange={setPeople} />
             <div className="field">
-              <button className="button is-primary">Save</button>
+              <button className="btn btn-dark">Save</button>
             </div>
           </form>
         </div>

@@ -23,7 +23,6 @@ function ActivityForm() {
         e.preventDefault();
         createActivity({data: {activity_name: activity, activity_address: address, longitude, latitude, rating, picture_url: picture, hotel_distance: distance}, id: tripId});
     }
-
     if (result.isSuccess) {
         navigate(`/trips/${tripId}`);
     } else if (result.isError) {

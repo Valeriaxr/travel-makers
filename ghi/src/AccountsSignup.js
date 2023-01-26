@@ -32,14 +32,14 @@ function Signup() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            position: "absolute",
+            position: "fixed",
             top: "40%",
             left: "50%",
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: "17%",
-            height: "17%",
+            width: '250px',
+            height: "300px",
 
         }}>
     <div className="columns is-centered">
@@ -49,13 +49,13 @@ function Signup() {
           <BulmaInput
               label="First name"
               id="first"
-              placeholder="Alex"
+              placeholder="John"
               value={first}
               onChange={setFirst} />
             <BulmaInput
               label="Last name"
               id="last"
-              placeholder="Reiman"
+              placeholder="Doe"
               value={last}
               onChange={setLast} />
             <BulmaInput
@@ -72,7 +72,7 @@ function Signup() {
               value={password}
               onChange={setPassword} />
             <div className="field">
-              <button className="button is-primary">Save</button>
+              <button className="btn btn-dark">Save</button>
             </div>
           </form>
         </div>

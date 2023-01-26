@@ -83,25 +83,18 @@ function TripDetail() {
 
     return (
         <div>
-            <div className="box">
-            <div className="trip-deets" style={{ background: 'white', padding: '20px', opacity: '1.0'}}>
-                <div className="trip-name">Trip name: {trip.trip_name}</div>
-                <div className="destination">Destination: {trip.destination}</div>
-                <div className="date">Starting: {trip.start_date}- ending: {trip.end_date}</div>
-                <div className="people-joining">{trip.num_people} people are joining you in this trip</div>
+            <div className="box" style={{ background: '#cccec8', display: 'flex', justifyContent: 'center' }}>
+                <div className="trip-deets" style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0'}}>
+                    <div className="trip-name">Trip name: {trip.trip_name}</div>
+                    <div className="destination">Destination: {trip.destination}</div>
+                    <div className="date">Starting: {trip.start_date}- ending: {trip.end_date}</div>
+                    <div className="people-joining">{trip.num_people} people are joining you in this trip</div>
+                </div>
             </div>
-            </div>
-
-            {/* <div className="back-vid">
-                <video src={vid1} autoPlay loop muted
-                className="vid-cover"> </video>
-            </div> */}
-
-
             <div>
-                <div className="box-two">
+                <div className="box-two" style={{ background: '#cccec8' }}>
                 <h2>Flight info</h2>
-                <table>
+                <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0'}}>
                     <thead>
                         <tr>
                             <th>Number</th>
@@ -125,12 +118,12 @@ function TripDetail() {
                         })}
                     </tbody>
                  </table>
-                <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/flights/new`)}}>Add a flight</button>
+                <button className="btn btn-dark btn-lg px-4 gap-3"onClick={() => {navigate(`/trips/${tripId}/flights/new`)}}>Add a flight</button>
             </div>
             <div>
-                <div className="box-three">
+                <div className="box-three" style={{ background: '#cccec8' }}>
                 <h2>Hotel info</h2>
-                <table>
+                <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0'}}>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -154,12 +147,12 @@ function TripDetail() {
                         })}
                     </tbody>
                  </table>
-                <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/hotels/new`)}}>Add a hotel</button>
+                <button className="btn btn-dark btn-lg px-4 gap-3"onClick={() => {navigate(`/trips/${tripId}/hotels/new`)}}>Add a hotel</button>
             </div>
             <div>
-                <div className="box-four">
+                <div className="box-four" style={{ background: '#cccec8' }}>
                 <h2>Activity info</h2>
-                <table>
+                <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0'}}>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -168,7 +161,7 @@ function TripDetail() {
                             <th>Latitude</th>
                             <th>Rating</th>
                             <th>Picture</th>
-                            <th> Distance from hotel</th>
+                            <th>Distance from hotel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -187,7 +180,7 @@ function TripDetail() {
                         })}
                     </tbody>
                  </table>
-                <button className='button is-primary'onClick={() => {navigate(`/trips/${tripId}/activities/new`)}}>Add an activity</button>
+                <button className="btn btn-dark btn-lg px-4 gap-3"onClick={() => {navigate(`/trips/${tripId}/activities/new`)}}>Add an activity</button>
             </div>
         </div>
         </div>
