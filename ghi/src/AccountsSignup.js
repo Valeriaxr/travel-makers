@@ -28,8 +28,21 @@ function Signup() {
     }
 
     return (
-    <div className="container">
-      <div className="columns is-centered">
+      <div className="container" style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%, -40%)",
+            backgroundColor: "#d3c6a3",
+            border: "1.75px solid black",
+            width: "17%",
+            height: "17%",
+
+        }}>
+    <div className="columns is-centered">
         <div className="column is-one-third">
           <ErrorNotification error={error} />
           <form onSubmit={handleSubmit}>
@@ -63,9 +76,9 @@ function Signup() {
             </div>
           </form>
         </div>
-      </div>
     </div>
+  </div>
     )
 }
 
-export default Signup
+export default Signup;

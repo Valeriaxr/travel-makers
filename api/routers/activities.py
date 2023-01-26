@@ -52,7 +52,6 @@ def get_activity(
     account_data: dict = Depends(authenticator.get_current_account_data),
     activity_repo: ActivityRepository=Depends(),
     trip_repo: TripRepository=Depends(),
-
 ) -> ActivityOut:
     trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:

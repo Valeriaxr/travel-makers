@@ -37,7 +37,6 @@ export const accountsApi = createApi({
         logIn: builder.mutation({
             query: info => {
                 let formData = null;
-                console.log(info)
                 if (info instanceof HTMLElement) {
                     formData = new FormData(info);
                 } else {

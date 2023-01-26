@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-// import { clearForm } from './accountSlice';
 import { accountsApi } from './accountsApi';
 
 export const tripsApi = createApi({
@@ -54,23 +53,6 @@ export const tripsApi = createApi({
             }),
             providesTags: ['Trips'],
         }),
-        // getTrip: builder.query({
-        //     query: tripId => ({
-        //         method: 'get',
-        //         url: `/api/trips/${tripId}/`,
-        //         credentials: 'include',
-        //     }),
-        //     providesTags: data => {
-        //         const tags = [{type: 'Trips', id: 'GET'}];
-        //         if (!data || !data.trips) return tags;
-
-        //         const { trips } = data;
-        //         if (trips) {
-        //             tags.concat(...trips.map(({ id }) => ({type: 'Trips', id})));
-        //         }
-        //         return tags;
-        //     }
-        // }),
     }),
 });
 

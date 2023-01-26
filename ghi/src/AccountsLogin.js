@@ -9,12 +9,10 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-   const [passwordVisible, setPasswordVisible] = useState('false');
+    const [passwordVisible, setPasswordVisible] = useState('false');
     const [error, setError] = useState('');
     const [logIn, result] = useLogInMutation();
 
-
-    
 
     async function handleSubmit(e) {
        e.preventDefault();
@@ -30,8 +28,8 @@ function Login() {
     return (
         <div>
             <div className="container" style={{
-            display: "flex", 
-            alignItems: "center", 
+            display: "flex",
+            alignItems: "center",
             justifyContent: "center",
             position: "absolute",
             top: "40%",
@@ -40,9 +38,8 @@ function Login() {
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
             width: "17%",
-            height: "15%",
-
-        }}>
+            height: "17%",
+            }}>
                 <div className="columns is-centered">
                     <div className="column is-one-third">
                         <ErrorNotification error={error} />
