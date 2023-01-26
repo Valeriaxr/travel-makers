@@ -1,15 +1,15 @@
 # Travel Makers
 
-## Group Members
-
 Alex
 Anderson
 Valeria
 Victoria
 
+Unravel your travel!
+
 ## Design
 
-(Insert Excalidraw here)
+point to api, ghi, data model
 
 ## Technologies Used
 
@@ -19,14 +19,17 @@ Victoria
 * [ ] Redux
 * [ ] Bootstrap
 
-## Functionality
+## Project Initialization
 
-Sign Up and Login In page: Users will be able to sign up for an account, then after be redirected to our Login page.
-Create a trip: Once a user is signed in, they will be brought to the Trips List page where they can create their first trip.
-Add a Flight/Activity/Hotel: After the user creates a trip, a clickable link to the trip will appear on our Trip Details page. When the link is clicked, there are options to add a flight, activity, and hotel to the current trip the user has selected.
-Sign Out: When a user wants to sign out they will click on the tab in the navbar which will allow them to sign off from their account.
+
+ * Sign Up and Login In page: Users will be able to sign up for an account, then after be redirected to our Login page.
+* Create a trip: Once a user is signed in, they will be brought to the Trips List page where they can create their first trip.
+* Add a Flight/Activity/Hotel: After the user creates a trip, a clickable link to the trip will appear on our Trip Details page. When the link is clicked, there are options to add a flight, activity, and hotel to the current trip the user has selected.
+* Sign Out: When a user wants to sign out they will click on the tab in the navbar which will allow them to sign off from their account.
 
 ### Directories
+
+Intended market: targetting people who enjoy traveling and also enjoy being organized.
 
 Several directories have been added to your project. The
 directories `docs` and `journals` are places for you and
