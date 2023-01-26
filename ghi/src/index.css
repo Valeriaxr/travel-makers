@@ -170,4 +170,5 @@ button {
 
 .bg-info {
   background-color: white;
+  z-index: 0;
 }
