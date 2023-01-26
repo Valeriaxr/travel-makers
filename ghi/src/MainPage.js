@@ -20,6 +20,12 @@ function MainPage() {
             />
             <video src={island} autoPlay loop muted />
         </div>
+
+
+
+
+
+
     )
 }
 

@@ -17,6 +17,7 @@ def create_hotel(
     trip_repo: TripRepository = Depends(),
     hotel_repo: HotelRepository=Depends()
 ):
+
     trip = trip_repo.get_trip(trip_id, account_data['id'])
     if trip is None:
         response.status_code=404

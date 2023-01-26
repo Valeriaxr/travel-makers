@@ -10,6 +10,10 @@ class MyAuthenticator(Authenticator):
         username: str,
         accounts: AccountRepository,
     ):
+
+
+
+
         # Use your repo to get the account based on the
         # username (which could be an email)
         return accounts.get_account(username)
