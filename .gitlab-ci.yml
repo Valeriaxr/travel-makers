@@ -46,7 +46,7 @@ build-front-end-job:
     paths:
       - ghi/build/
 
-build-api-back-end-job:
+build-back-end-job:
   image: docker:19.03.1
   stage: build
   services:
