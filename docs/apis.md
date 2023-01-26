@@ -7,4 +7,4 @@ input (ActivityIn)
     "activity_name": string,
 
 }
-<img src="Main-Page.png>
+![alt text](https:Main-Page.png)
