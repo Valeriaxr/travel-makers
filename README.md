@@ -6,7 +6,7 @@ Valeria Ramirez\
 Victoria Figueroa
 
 Travel Makers - Unravel your travel!\
-\
+
 
 Our app is designed to help users plan and organize their travel plans all in one place. With a user-friendly interface, users can easily create their own custom itnerary with flights, hotels, and activities.
 
@@ -22,7 +22,7 @@ point to api, ghi, data model
 * [ ] Redux
 * [ ] Bootstrap
 
-## Project Initialization
+## Functionality
 
 
 * Sign Up and Login In page: Users will be able to sign up for an account, then after be redirected to our Login page.\
