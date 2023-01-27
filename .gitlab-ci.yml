@@ -24,28 +24,6 @@ variables:
 #     - pip install -r requirements.txt
 #     - python -m pytest
 
-# Build the React/JavaScript front-end
-build-front-end-job:
-  stage: build
-  image: node:lts-bullseye
-  # needs:
-  #   - lint-test-job
-  variables:
-    # If either of these variables is defined in the GitLab
-    # CI/CD variables, that value will override the value here.
-    # You need to substitute in your real values for
-    # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-    PUBLIC_URL: https://travel-makers.gitlab.io/travel-makers
-    REACT_APP_TRAVEL_MAKERS: http://api.sept-ct-13.mod3projects.com
-  script:
-    - cd ghi
-    - npm install
-    - npm run build
-    - cp build/index.html build/404.html
-  artifacts:
-    paths:
-      - ghi/build/
-
 build-back-end-job:
   image: docker:19.03.1
   stage: build
@@ -71,6 +49,28 @@ build-back-end-job:
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
   only:
     - master
+
+# Build the React/JavaScript front-end
+build-front-end-job:
+  stage: build
+  image: node:lts-bullseye
+  # needs:
+  #   - lint-test-job
+  variables:
+    # If either of these variables is defined in the GitLab
+    # CI/CD variables, that value will override the value here.
+    # You need to substitute in your real values for
+    # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
+    PUBLIC_URL: https://travel-makers.gitlab.io/travel-makers
+    REACT_APP_TRAVEL_MAKERS: http://api.sept-ct-13.mod3projects.com
+  script:
+    - cd ghi
+    - npm install
+    - npm run build
+    - cp build/index.html build/404.html
+  artifacts:
+    paths:
+      - ghi/build/
 
 # Deploy the React/JavaScript front-end to GitLab pages
 pages:
