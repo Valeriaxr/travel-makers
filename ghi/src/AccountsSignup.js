@@ -38,8 +38,8 @@ function Signup() {
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: '250px',
-            height: "300px",
+            width: '300px',
+            height: "360px",
 
         }}>
     <div className="columns is-centered">
