@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link} from 'react-router-dom';
+import mex from './vids/mex.mp4';
 
 function TripColumn(props) {
   return (
@@ -87,22 +88,25 @@ class TripList extends React.Component {
 
   render() {
     return (
-      <>
-      <div className="tm-box" style={{width: '30%', height: '30%', margin: '0 auto'}}>
-        <div className="px-4 py-5 my-5 mt-0 text-center" style={{backgroundColor: '#FAECD6'}}>
-          <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" style={{filter: 'white(100%)'}} />
-          <h1 className="display-5 fw-bold">Travel Makers</h1>
-          <div className="col-lg-6 mx-auto">
-            <p className="lead mb-4">
-              Start planning your trip now!
-            </p>
-            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/trips/new" className="btn btn-dark btn-lg px-4 gap-3">Create your trip</Link>
-            </div>
+
+      <><div className='mec-vid'>
+        <video src={mex} autoPlay loop muted />
+      </div>
+
+      <div className="tm-box" style={{ width: '30%', height: '30%', margin: '0 auto' }}>
+          <div className="px-4 py-5 my-5 mt-0 text-center" style={{ backgroundColor: '#FAECD6' }}>
+            <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" style={{ filter: 'white(100%)' }} />
+            <h1 className="display-5 fw-bold">Travel Makers</h1>
+            <div className="col-lg-6 mx-auto">
+              <p className="lead mb-4">
+                Start planning your trip now!
+              </p>
+              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <Link to="/trips/new" className="btn btn-dark btn-lg px-4 gap-3">Create your trip</Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="container">
+        </div><div className="container">
           <h2>Upcoming trips</h2>
           <div className="row">
             {this.state.tripColumns.map((tripList, index) => {
@@ -111,8 +115,7 @@ class TripList extends React.Component {
               );
             })}
           </div>
-        </div>
-      </>
+        </div></>
     );
   }
 }

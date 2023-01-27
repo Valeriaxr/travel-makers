@@ -31,9 +31,11 @@ function Signup() {
     }, [result, navigate]);
 
     return (
-        <><div className='sign' style={{ width: "30%", height: "60%" }}>
+    <><div className='sign' style={{ width: "30%", height: "60%" }}>
         <video src={sail} autoPlay loop muted />
-      </div><div className="container" style={{
+      </div>
+
+      <div className="container" style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -83,7 +85,9 @@ function Signup() {
               </form>
             </div>
           </div>
-        </div></>
+        </div>
+         </>
+
     )
 }
 

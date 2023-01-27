@@ -20,7 +20,7 @@ function MainPage() {
                     width: "300px",
                 }}
              alt="video of a beach"/>
-            <video src={island} autoPlay loop muted />
+            <video src={videos} autoPlay loop muted />
         </div>
 
 

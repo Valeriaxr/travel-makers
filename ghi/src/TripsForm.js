@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
+import trip from './vids/trip.mp4';
 import { useAddTripMutation } from './store/tripsApi';
 import ErrorNotification from "./ErrorNotification";
-import vidd from './vids/trip.mp4';
+
 
 
 function TripForm() {
@@ -29,11 +30,10 @@ function TripForm() {
     }, [result, navigate, error])
 
     return (
-      <><div className='back-vid' style={{ width: "30%", height: "60%" }}>
-        <video src {...vidd} autoPlay loop muted />
-      </div>
 
-      <div className="container" style={{
+      <><div className='sign-vid'>
+        <video src={trip} autoPlay loop muted />
+      </div><div className="container" style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -48,6 +48,7 @@ function TripForm() {
         width: '230px',
         height: "375px",
       }}>
+
           <div className="columns is-centered">
             <div className="column is-one-third">
               <ErrorNotification error={error} />
