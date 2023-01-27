@@ -1,11 +1,14 @@
 # Travel Makers
 
-Alex\
-Anderson\
-Valeria\
-Victoria\
+Alex Reiman\
+Anderson Ngo\
+Valeria Ramirez\
+Victoria Figueroa
 
-Unravel your travel!
+Travel Makers - Unravel your travel!\
+\
+
+Our app is designed to help users plan and organize their travel plans all in one place. With a user-friendly interface, users can easily create their own custom itnerary with flights, hotels, and activities.
 
 ## Design
 
@@ -22,9 +25,9 @@ point to api, ghi, data model
 ## Project Initialization
 
 
- * Sign Up and Login In page: Users will be able to sign up for an account, then after be redirected to our Login page.
-* Create a trip: Once a user is signed in, they will be brought to the Trips List page where they can create their first trip.
-* Add a Flight/Activity/Hotel: After the user creates a trip, a clickable link to the trip will appear on our Trip Details page. When the link is clicked, there are options to add a flight, activity, and hotel to the current trip the user has selected.
+* Sign Up and Login In page: Users will be able to sign up for an account, then after be redirected to our Login page.\
+* Create a trip: Once a user is signed in, they will be brought to the Trips List page where they can create their first trip.\
+* Add a Flight/Activity/Hotel: After the user creates a trip, a clickable link to the trip will appear on our Trip Details page. When the link is clicked, there are options to add a flight, activity, and hotel to the current trip the user has selected.\
 * Sign Out: When a user wants to sign out they will click on the tab in the navbar which will allow them to sign off from their account.
 
 ### Directories
@@ -92,17 +95,6 @@ a most successful project.
 There will be further guidance on completing the initial
 deployment, but it just consists of these steps:
 
-### Setup GitLab repo/project
-
-* make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-* remove the fork relationship: In GitLab go to:
-
-  Settings -> General -> Advanced -> Remove fork relationship
-
-* add these GitLab CI/CD variables:
-  * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
 
 #### Your GitLab pages URL
 
