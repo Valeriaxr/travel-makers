@@ -21,7 +21,7 @@ function HotelForm() {
         if (result.isSuccess) {
             navigate(`/trips/${tripId}`);
         }
-    }, [result, navigate]);
+    }, [result, navigate, tripId]);
 
 return (
     <div className="container" style={{

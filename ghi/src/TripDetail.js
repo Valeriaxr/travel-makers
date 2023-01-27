@@ -177,7 +177,7 @@ function TripDetail() {
                                     <td>{activity.longitude}</td>
                                     <td>{activity.latitude}</td>
                                     <td>{activity.rating}</td>
-                                    <td><img src={activity.picture_url} width="200" height="150" alt='activity picture'/></td>
+                                    <td><img src={activity.picture_url} width="200" height="150" alt=''/></td>
                                     <td>{activity.hotel_distance}</td>
                                 </tr>
                             );
