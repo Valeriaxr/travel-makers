@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import Optional, Union, List
 from queries.pool import pool
 
 class AccountIn(BaseModel):

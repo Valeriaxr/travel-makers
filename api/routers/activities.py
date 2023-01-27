@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, Optional, List
+from typing import Optional, List
 from queries.activities import (
     Error,
     ActivityIn,
@@ -13,7 +13,7 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.post("/api/trips/{trip_id}/activities", response_model=Union[ActivityOut, Error] )
+@router.post("/api/trips/{trip_id}/activities", response_model=ActivityOut | Error)
 def create_activity(
     activity: ActivityIn,
     trip_id: int,

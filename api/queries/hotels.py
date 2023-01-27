@@ -15,6 +15,7 @@ class HotelIn(BaseModel):
     latitude: float
 
 
+
 class HotelOut(BaseModel):
     id: int
     hotel_name: str

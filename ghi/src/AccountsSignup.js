@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useSignUpMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
+import sail from './vids/sail.mp4';
 
 
 
@@ -21,63 +22,72 @@ function Signup() {
         createAccount({email, password, first_name: first, last_name: last});
     }
 
-    if (result.isSuccess) {
-        navigate("/login");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+      if (result.isSuccess) {
+          navigate("/login");
+      } else if (result.isError) {
+          setError(result.error);
+      }
+    }, [result, navigate]);
 
     return (
-      <div className="container" style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "absolute",
-            top: "40%",
-            left: "50%",
-            transform: "translate(-50%, -40%)",
-            backgroundColor: "#d3c6a3",
-            border: "1.75px solid black",
-            width: "17%",
-            height: "17%",
+    <><div className='sign' style={{ width: "30%", height: "60%" }}>
+        <video src={sail} autoPlay loop muted />
+      </div>
 
-        }}>
-    <div className="columns is-centered">
-        <div className="column is-one-third">
-          <ErrorNotification error={error} />
-          <form onSubmit={handleSubmit}>
-          <BulmaInput
-              label="First name"
-              id="first"
-              placeholder="Alex"
-              value={first}
-              onChange={setFirst} />
-            <BulmaInput
-              label="Last name"
-              id="last"
-              placeholder="Reiman"
-              value={last}
-              onChange={setLast} />
-            <BulmaInput
-              label="Email"
-              id="email"
-              type="email"
-              placeholder="example@example.com"
-              value={email}
-              onChange={setEmail} />
-            <BulmaInput
-              label="Password"
-              id="password"
-              placeholder="password"
-              value={password}
-              onChange={setPassword} />
-            <div className="field">
-              <button className="button is-primary">Save</button>
+      <div className="container" style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        top: "40%",
+        left: "50%",
+        transform: "translate(-40%, -40%)",
+        boxShadow: '1px 2px 5px black',
+        backgroundColor: "#f2f2f2",
+        borderRadius: 4,
+        border: "1.75px solid black",
+        width: '230px',
+        height: "375px",
+      }}>
+          <div className="columns is-centered">
+            <div className="column is-one-third">
+              <ErrorNotification error={error} />
+              <form onSubmit={handleSubmit}>
+                <BulmaInput
+                  label="First name"
+                  id="first"
+                  placeholder="John"
+                  value={first}
+                  onChange={setFirst} />
+                <BulmaInput
+                  label="Last name"
+                  id="last"
+                  placeholder="Doe"
+                  value={last}
+                  onChange={setLast} />
+                <BulmaInput
+                  label="Email"
+                  id="email"
+                  type="email"
+                  placeholder="example@example.com"
+                  value={email}
+                  onChange={setEmail} />
+                <BulmaInput
+                  label="Password"
+                  id="password"
+                  placeholder="password"
+                  value={password}
+                  onChange={setPassword} />
+                <div className="field">
+                  <button className="btn btn-dark btn-sm">Save</button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
-    </div>
-  </div>
+         </>
+
     )
 }
 

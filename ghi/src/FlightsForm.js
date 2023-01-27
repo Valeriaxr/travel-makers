@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ErrorNotification from './ErrorNotification';
 import { useCreateFlightMutation } from './store/flightsApi';
 import BulmaInput from './BulmaInput';
 
@@ -12,7 +11,6 @@ function FlightForm() {
     const [arrival, setArrival]= useState('');
     const [departureTime, setDepartureTime]= useState('');
     const [arrivalTime, setArrivalTime]= useState('');
-    const [error, setError]= useState('');
     const [createFlight, result] = useCreateFlightMutation();
 
     async function handleSubmit(e) {
@@ -23,12 +21,12 @@ function FlightForm() {
         if (result.isSuccess) {
             navigate(`/trips/${tripId}`);
         }
-    }, [result, navigate]);
+    }, [result, navigate, tripId]);
 
 return (
     <div className="container" style={{
-            display: "flex", 
-            alignItems: "center", 
+            display: "flex",
+            alignItems: "center",
             justifyContent: "center",
             position: "absolute",
             top: "40%",
@@ -42,7 +40,6 @@ return (
         }}>
       <div className="columns is-centered">
         <div className="column is-one-third">
-          <ErrorNotification error={error} />
           <form onSubmit={handleSubmit}>
           <BulmaInput
               label="Flight number"
