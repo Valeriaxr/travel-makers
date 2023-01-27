@@ -27,12 +27,11 @@ output (ActivityOut)
     "hotel_distance": float
 
 }
+```
 Creating a new activity will be added to our TripsDetails page.
 
 
-```
-
-## FLights
+## Flights
 * **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```
 * **Path:** ```/api/trips/{trip_id}/flights```, ```/api/trips/{trip_id}/flights/{flight.id}```
 input
@@ -60,6 +59,7 @@ output
     "arrival_time": datetime
 }
 ```
+Creating a flight will be added to our TripsDetails page.
 
 ## Hotels
 * **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```
@@ -86,6 +86,7 @@ output
     "latitude": float
 }
 ```
+Creating a hotel will be added to our TripsDetails page.
 
 # Trips
 * **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```
@@ -111,6 +112,7 @@ output
     "end_date": date
     "num_people": int
 ```
+Creating a trip we be added to our TripsList page.
 
 # Accounts
 * **Method** ```POST```
