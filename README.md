@@ -32,7 +32,7 @@ Our app is designed to help users plan and organize their travel plans all in on
 
 * Sign Up and Login In page: Users will be able to sign up for an account, then after be redirected to our Login page.
 * Create a trip: Once a user is signed in, they will be brought to the Trips List page where they can create their first trip.
-* Add a Flight/Activity/Hotel: After the user creates a trip, a clickable link to the trip will appear on our Trip Details page. When the link is clicked, there are options to add a flight, activity, and hotel to the current trip the user has selected.
+* Add a Flight/Activity/Hotel: After the user creates a trip, a clickable link to the trip will appear on our Trip Details page. When the link is clicked, there are options to add a flight, activity, and hotel to the current trip the user has selected. After adding a flight, activity or hotel, users are redirected to the Trip Details page where a list of flight, activity, and hotel detais are shown.
 * Sign Out: When a user wants to sign out they will click on the tab in the navbar which will allow them to sign off from their account.
 
 ## Intended Market
