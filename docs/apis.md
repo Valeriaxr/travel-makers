@@ -1,7 +1,9 @@
 ## API
 
 ## Product
-*Method: POST, GET
+* **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```\
+* **Path:** ```/api/trips/{trip_id}/activities```, ```/api/trips/{trip_id}/activities/{activity.id}```
+
 input (ActivityIn)
 ```
 {
@@ -24,6 +26,7 @@ output (ActivityOut)
     "hotel_distance": float
 
 }
+Creating a new activity will be added to our TripsDetails page.
 
 
 ```
