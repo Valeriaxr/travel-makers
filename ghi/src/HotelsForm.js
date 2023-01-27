@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useCreateHotelMutation } from './store/hotelsApi';
-import ErrorNotification from './ErrorNotification';
 
 function HotelForm() {
     const {tripId} = useParams();
@@ -12,7 +11,6 @@ function HotelForm() {
     const [city, setCity]= useState('');
     const [longitude, setLongitude]= useState('');
     const [latitude, setLatitude]= useState('');
-    const [error, setError]= useState('');
     const [createHotel, result] = useCreateHotelMutation();
 
     async function handleSubmit(e) {
@@ -27,8 +25,8 @@ function HotelForm() {
 
 return (
     <div className="container" style={{
-            display: "flex", 
-            alignItems: "center", 
+            display: "flex",
+            alignItems: "center",
             justifyContent: "center",
             position: "absolute",
             top: "40%",
@@ -42,7 +40,6 @@ return (
         }}>
       <div className="columns is-centered">
         <div className="column is-one-third">
-          <ErrorNotification error={error} />
           <form onSubmit={handleSubmit}>
           <BulmaInput
               label="Hotel name"

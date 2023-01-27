@@ -73,8 +73,7 @@ function TripDetail() {
         getFlightData();
         getHotelData();
         getActivityData();
-    }, [getActivityData, getFlightData, getHotelData, getTripData]
-    )
+    })
 
 
 
