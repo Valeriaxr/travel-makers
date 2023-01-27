@@ -12,7 +12,9 @@ Our app is designed to help users plan and organize their travel plans all in on
 
 ## Design
 
-[API](docs/apis.md), ghi, data model
+* [API Design](docs/apis.md)
+* [GHI](docs/ghi.md)
+* [Data Model](docs/data-model.md)
 
 ## Technologies Used
 
