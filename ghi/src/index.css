@@ -115,19 +115,21 @@ video {
   position: relative;
   display: grid;
   grid-gap: 10px;
-  width: 100%;
+  width: 95%;
   font-size: 13px;
   line-height: 15pt;
   background-color: #eee;
-  padding: 55px;
+  padding: 65px;
   z-index: 4;
 }
 
+h2
+
 .box-three {
-  position: absolute;
+  position: relative;
   display: grid;
   grid-gap: 10px;
-  width: 50%;
+  width: 40%;
   font-size: 13px;
   line-height: 1;
   background-color: #eee;

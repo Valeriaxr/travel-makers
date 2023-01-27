@@ -5,7 +5,7 @@ import travelmakers from './images/travelmakers.png'
 function MainPage() {
     return (
         <div className='main' style={{textAlign:'center'}}>
-            <img src={travelmakers} 
+            <img src={travelmakers}
                 style={{
                     display: "flex",
                     alignItems: "center",
