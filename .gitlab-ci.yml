@@ -23,7 +23,6 @@ variables:
 #     - cd sample_service
 #     - pip install -r requirements.txt
 #     - python -m pytest
-
 build-back-end-job:
   image: docker:19.03.1
   stage: build
@@ -36,7 +35,6 @@ build-back-end-job:
     - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
     - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
     - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
-
   script:
     - cd api
     - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
@@ -48,7 +46,7 @@ build-back-end-job:
     - echo "Deploying on CapRover..."
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
   only:
-    - master
+    - main
 
 # Build the React/JavaScript front-end
 build-front-end-job:
