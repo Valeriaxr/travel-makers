@@ -19,7 +19,13 @@ export const activitiesApi = createApi({
     }),
     endpoints: builder => ({
         getActivities: builder.query({
-            query: () => '/api/activities/',
+            query: (activities, id) => {
+                return {
+                    url: `/api/trips/${id}/activities`,
+                    credentials: 'include',
+                    body: activities,
+                }
+            }
         }),
         createActivity: builder.mutation({
             query: ({data, id}) => ({
