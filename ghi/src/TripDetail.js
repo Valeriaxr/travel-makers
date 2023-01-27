@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
-import Col from 'react-bootstrap/Col';
+
 
 
 
@@ -73,7 +73,7 @@ function TripDetail() {
         getFlightData();
         getHotelData();
         getActivityData();
-    })
+    }, [])
 
 
 
@@ -91,9 +91,6 @@ function TripDetail() {
                 <h2>Flight info</h2>
                 <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0' }}>
                     <thead>
-                        <Col style={{
-                            backgroundColor: 'white',
-                        }}>
                             <tr>
                                 <th>Number</th>
                                 <th>Departure City</th>
@@ -101,7 +98,6 @@ function TripDetail() {
                                 <th>Departure Time</th>
                                 <th>Arrival Time</th>
                             </tr>
-                        </Col>
                     </thead>
                     <tbody>
                         {flights?.map(flight => {
@@ -123,9 +119,6 @@ function TripDetail() {
             <h2>Hotel info</h2>
             <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0' }}>
                 <thead>
-                    <Col style={{
-                        backgroundColor: 'white',
-                    }}>
                         <tr>
                             <th>Name</th>
                             <th>Address</th>
@@ -133,7 +126,6 @@ function TripDetail() {
                             <th>Longitude</th>
                             <th>Latitude</th>
                         </tr>
-                    </Col>
                 </thead>
                 <tbody>
                     {hotels?.map(hotel => {
@@ -154,9 +146,6 @@ function TripDetail() {
                 <h2>Activity info</h2>
                 <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0' }}>
                     <thead>
-                        <Col style={{
-                            backgroundColor: 'white',
-                        }}>
                             <tr>
                                 <th>Name</th>
                                 <th>Address</th>
@@ -166,7 +155,6 @@ function TripDetail() {
                                 <th>Picture</th>
                                 <th>Distance from hotel</th>
                             </tr>
-                        </Col>
                     </thead>
                     <tbody>
                         {activities?.map(activity => {

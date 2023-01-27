@@ -3,13 +3,11 @@ import { Link} from 'react-router-dom';
 
 function TripColumn(props) {
   return (
-    <div className="col" >
+    <div className="col">
       {props.list.map(data => {
-        // const trip = data;
         return (
           <div key={data.id} className="card mb-3 shadow" style={{backgroundColor: '#FAECD6'}}>
             <Link className='' to={`/trips/${data.id}`}>
-            {/* <img src={conference.location.picture_url} className="card-img-top" /> */}
             <div className="card-body">
               <h5 className="card-title">{data.trip_name}</h5>
               <h6 className="card-subtitle mb-2 text-muted">
@@ -48,12 +46,8 @@ class TripList extends React.Component {
           'Content-Type': 'application/json'
         }
       });
-      if (response.ok) {
-        // Get the list of conferences
+      if (response.ok || response.status_code === 500) {
         const data = await response.json();
-        console.log('data', data)
-        // Create a list of for all the requests and
-        // add all of the requests to it
         const requests = [];
         for (let trip of data) {
           const detailUrl = `${process.env.REACT_APP_TRAVEL_MAKERS}/api/trips/${trip.id}`;
@@ -66,17 +60,10 @@ class TripList extends React.Component {
           }));
         }
 
-        // Wait for all of the requests to finish
-        // simultaneously
         const responses = await Promise.all(requests);
 
-        // Set up the "columns" to put the conference
-        // information into
         const tripColumns = [[], [], []];
 
-        // Loop over the conference detail responses and add
-        // each to to the proper "column" if the response is
-        // ok
         let i = 0;
         for (const tripResponse of responses) {
           if (tripResponse.ok) {
@@ -91,8 +78,6 @@ class TripList extends React.Component {
           }
         }
 
-        // Set the state to the new list of three lists of
-        // conferences
         this.setState({tripColumns: tripColumns});
       }
     } catch (e) {
@@ -125,7 +110,7 @@ class TripList extends React.Component {
                 <TripColumn key={index} list={tripList} className="listie" />
               );
             })}
-        </div>
+          </div>
         </div>
       </>
     );

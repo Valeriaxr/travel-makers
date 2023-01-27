@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useSignUpMutation } from './store/accountsApi';
@@ -21,11 +21,13 @@ function Signup() {
         createAccount({email, password, first_name: first, last_name: last});
     }
 
-    if (result.isSuccess) {
-        navigate("/login");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+      if (result.isSuccess) {
+          navigate("/login");
+      } else if (result.isError) {
+          setError(result.error);
+      }
+    }, [result, navigate]);
 
     return (
       <div className="container" style={{

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useLogInMutation } from './store/accountsApi';
@@ -18,11 +18,13 @@ function Login() {
        logIn({email, password});
    }
 
-    if (result.isSuccess) {
-        navigate("/trips");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+      if (result.isSuccess) {
+          navigate("/trips");
+      } else if (result.isError) {
+          setError(result.error);
+      }
+    }, [result, navigate]);
 
     return (
         <div>
