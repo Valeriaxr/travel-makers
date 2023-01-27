@@ -80,7 +80,7 @@ function TripDetail() {
     return (
         <><div>
             <div className="box" style={{ background: 'transparent', display: 'flex', justifyContent: 'center' }}>
-                <div className="trip-deets" style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0' }}>
+                <div className="trip-deets" style={{ background: "#f2f2f2", padding: '20px', opacity: '1.0' }}>
                     <div className="trip-name">Trip name: {trip.trip_name}</div>
                     <div className="destination">Destination: {trip.destination}</div>
                     <div className="date">Starting: {trip.start_date}- ending: {trip.end_date}</div>
@@ -89,7 +89,7 @@ function TripDetail() {
             </div>
             <div>
                 <h2>Flight info</h2>
-                <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0' }}>
+                <table style={{ background: "#f2f2f2", padding: '20px', opacity: '1.0' }}>
                     <thead>
                             <tr>
                                 <th>Number</th>
@@ -117,7 +117,7 @@ function TripDetail() {
             </div>
 
             <h2>Hotel info</h2>
-            <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0' }}>
+            <table style={{ background: "#f2f2f2", padding: '20px', opacity: '1.0' }}>
                 <thead>
                         <tr>
                             <th>Name</th>
@@ -144,7 +144,7 @@ function TripDetail() {
             <button className="btn btn-primary btn-dark btn-sm" onClick={() => { navigate(`/trips/${tripId}/hotels/new`); } }>Add hotel</button>
         </div><div>
                 <h2>Activity info</h2>
-                <table style={{ background: "#d3c6a3", padding: '20px', opacity: '1.0' }}>
+                <table style={{ background: "#f2f2f2", padding: '20px', opacity: '1.0' }}>
                     <thead>
                             <tr>
                                 <th>Name</th>
