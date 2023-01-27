@@ -3,7 +3,9 @@
 # Accounts
 
 
-| Syntax | Description |
+| name | type |
 | --- | ----------- |
-| Header | Title |
-| Paragraph | Text |
+| email | string |
+| hashed_password | string |
+| first_name | string |
+| last_name | string |
