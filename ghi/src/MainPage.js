@@ -17,7 +17,7 @@ function MainPage() {
                     right: "5px",
                     left: "5px",
                 }}
-            />
+             alt="video of a beach"/>
             <video src={island} autoPlay loop muted />
         </div>
 

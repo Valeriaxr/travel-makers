@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useLogInMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
-import { NavLink } from "react-router-dom";
 
 function Login() {
     const navigate = useNavigate();

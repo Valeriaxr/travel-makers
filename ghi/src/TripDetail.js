@@ -1,9 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
-import { useGetFlightsQuery } from "./store/flightsApi";
-import vid1 from './vids/Hiking.mp4';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 
 
 
@@ -14,7 +11,6 @@ function TripDetail() {
     const [trip, setTrip] = useState('');
     const [flights, setFlights] = useState([]);
     const [hotels, setHotels] = useState([]);
-    const [currentVid, setCurrentVid] = useState(0);
     const [activities, setActivities] = useState([]);
     const navigate = useNavigate();
 
@@ -77,7 +73,7 @@ function TripDetail() {
         getFlightData();
         getHotelData();
         getActivityData();
-    }, []
+    }, [getActivityData, getFlightData, getHotelData, getTripData]
     )
 
 
@@ -182,7 +178,7 @@ function TripDetail() {
                                     <td>{activity.longitude}</td>
                                     <td>{activity.latitude}</td>
                                     <td>{activity.rating}</td>
-                                    <td><img src={activity.picture_url} width="200" height="150" /></td>
+                                    <td><img src={activity.picture_url} width="200" height="150" alt='activity picture'/></td>
                                     <td>{activity.hotel_distance}</td>
                                 </tr>
                             );
