@@ -15,8 +15,10 @@ input
     "hotel_distance": float
 
 }
+```
 
-output (ActivityOut)
+output
+```
 {
     "id": int
     "activity_name": string,
