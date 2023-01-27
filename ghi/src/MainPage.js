@@ -1,6 +1,6 @@
-import island from './store/island.mp4'
+import videos from './vids/tm.mp4'
 import React from 'react'
-import travelmakers from './images/travelmakers.png'
+import travelmakers from './logo/logo.png'
 
 function MainPage() {
     return (
@@ -8,6 +8,7 @@ function MainPage() {
             <img src={travelmakers}
                 style={{
                     display: "flex",
+                    boxShadow: '1px 2px 5px #FAF9F6',
                     alignItems: "center",
                     justifyContent: "center",
                     position: 'fixed',
@@ -16,6 +17,7 @@ function MainPage() {
                     bottom: '450px',
                     right: "5px",
                     left: "5px",
+                    width: "300px",
                 }}
              alt="video of a beach"/>
             <video src={island} autoPlay loop muted />
