@@ -5,7 +5,7 @@ Anderson Ngo\
 Valeria Ramirez\
 Victoria Figueroa
 
-Travel Makers - Unravel your travel!\
+Travel Makers - Unravel your travel!
 
 
 Our app is designed to help users plan and organize their travel plans all in one place. With a user-friendly interface, users can easily create their own custom itnerary with flights, hotels, and activities.
