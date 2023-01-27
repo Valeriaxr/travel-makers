@@ -4,7 +4,7 @@
 * **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```
 * **Path:** ```/api/trips/{trip_id}/activities```, ```/api/trips/{trip_id}/activities/{activity.id}```
 
-input (ActivityIn)
+input
 ```
 {
     "activity_name": string,
@@ -34,6 +34,7 @@ Creating a new activity will be added to our TripsDetails page.
 ## Flights
 * **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```
 * **Path:** ```/api/trips/{trip_id}/flights```, ```/api/trips/{trip_id}/flights/{flight.id}```
+
 input
 ```
 {
@@ -64,6 +65,7 @@ Creating a flight will be added to our TripsDetails page.
 ## Hotels
 * **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```
 * **Path:** ```/api/trips/{trip_id}/hotels```, ```/api/trips/{trip_id}/hotels/{hotel.id}```
+
 input
 ```
 {
@@ -73,6 +75,7 @@ input
     "longitude": float
     "latitude": float
 }
+
 ```
 
 output
@@ -91,6 +94,7 @@ Creating a hotel will be added to our TripsDetails page.
 # Trips
 * **Method:** ```POST```, ```GET```, ```PUT```, ```DELETE```
 * **Path:** ```/api/trips```, ```/api/trips/{trip_id}/```
+
 input
 ```
 {

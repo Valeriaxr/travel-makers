@@ -23,6 +23,9 @@ Our app is designed to help users plan and organize their travel plans all in on
 * [ ] React
 * [ ] Redux
 * [ ] Bootstrap
+* [ ] Python
+* [ ] FastAPI
+* [ ] CSS
 
 ## Functionality
 
