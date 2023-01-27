@@ -26,6 +26,8 @@ variables:
 build-back-end-job:
   image: docker:19.03.1
   stage: build
+  variables:
+    - CORS_HOST: https://travel-makers.gitlab.io
   services:
     - docker:19.03.1-dind
   before_script:
