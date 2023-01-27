@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useSignUpMutation } from './store/accountsApi';
@@ -21,25 +21,27 @@ function Signup() {
         createAccount({email, password, first_name: first, last_name: last});
     }
 
-    if (result.isSuccess) {
-        navigate("/login");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+      if (result.isSuccess) {
+          navigate("/login");
+      } else if (result.isError) {
+          setError(result.error);
+      }
+    }, [result, navigate]);
 
     return (
       <div className="container" style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            position: "absolute",
+            position: "fixed",
             top: "40%",
             left: "50%",
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: "17%",
-            height: "17%",
+            width: '250px',
+            height: "300px",
 
         }}>
     <div className="columns is-centered">
@@ -49,13 +51,13 @@ function Signup() {
           <BulmaInput
               label="First name"
               id="first"
-              placeholder="Alex"
+              placeholder="John"
               value={first}
               onChange={setFirst} />
             <BulmaInput
               label="Last name"
               id="last"
-              placeholder="Reiman"
+              placeholder="Doe"
               value={last}
               onChange={setLast} />
             <BulmaInput
@@ -72,7 +74,7 @@ function Signup() {
               value={password}
               onChange={setPassword} />
             <div className="field">
-              <button className="button is-primary">Save</button>
+              <button className="btn btn-dark">Save</button>
             </div>
           </form>
         </div>

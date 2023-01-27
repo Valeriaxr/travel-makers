@@ -3,7 +3,7 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  background: transparent;
+	background-color: transparent;
   height: 50px;
   display: flex;
   align-items: center;
@@ -13,6 +13,9 @@ nav {
   z-index: 5;
 }
 
+nav:hover {
+  background-color: black;
+}
 
 
 body {
@@ -31,6 +34,14 @@ code {
 }
 
 /* signup */
+
+form {
+
+    position: absolute;
+    top: 25%;
+    left: 10%;
+
+}
 
 body {
     background-image: url('./beach.jpg');
@@ -104,19 +115,21 @@ video {
   position: relative;
   display: grid;
   grid-gap: 10px;
-  width: 100%;
+  width: 95%;
   font-size: 13px;
   line-height: 15pt;
   background-color: #eee;
-  padding: 55px;
+  padding: 65px;
   z-index: 4;
 }
 
+h2
+
 .box-three {
-  position: absolute;
+  position: relative;
   display: grid;
   grid-gap: 10px;
-  width: 50%;
+  width: 40%;
   font-size: 13px;
   line-height: 1;
   background-color: #eee;
@@ -170,4 +183,29 @@ button {
 
 .bg-info {
   background-color: white;
+  z-index: 0;
+}
+
+
+/* logo */
+
+main {
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.25);
+    box-shadow: 0px 0px 40px 2px rgba(0,0,0,0.3);
+
+}
+
+
+
+
+.listie {
+  color: black;
+
 }

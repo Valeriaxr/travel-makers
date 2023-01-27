@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useLogInMutation } from './store/accountsApi';
 import ErrorNotification from "./ErrorNotification";
-import { NavLink } from "react-router-dom";
 
 function Login() {
     const navigate = useNavigate();
@@ -19,11 +18,13 @@ function Login() {
        logIn({email, password});
    }
 
-    if (result.isSuccess) {
-        navigate("/trips");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+      if (result.isSuccess) {
+          navigate("/trips");
+      } else if (result.isError) {
+          setError(result.error);
+      }
+    }, [result, navigate]);
 
     return (
         <div>
@@ -37,8 +38,8 @@ function Login() {
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: "17%",
-            height: "17%",
+            width: "250px",
+            height: "225px",
             }}>
                 <div className="columns is-centered">
                     <div className="column is-one-third">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useCreateActivityMutation } from './store/activitiesApi';
@@ -24,16 +24,18 @@ function ActivityForm() {
         createActivity({data: {activity_name: activity, activity_address: address, longitude, latitude, rating, picture_url: picture, hotel_distance: distance}, id: tripId});
     }
 
-    if (result.isSuccess) {
-        navigate(`/trips/${tripId}`);
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+      if (result.isSuccess) {
+          navigate(`/trips/${tripId}`);
+      } else if (result.isError) {
+          setError(result.error);
+      }
+    }, [result, navigate, tripId, error])
 
 return (
     <div className="container" style={{
-            display: "flex", 
-            alignItems: "center", 
+            display: "flex",
+            alignItems: "center",
             justifyContent: "center",
             position: "absolute",
             top: "40%",

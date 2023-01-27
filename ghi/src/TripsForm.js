@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import BulmaInput from './BulmaInput';
 import { useAddTripMutation } from './store/tripsApi';
@@ -19,17 +19,18 @@ function TripForm() {
         e.preventDefault();
         createTrip({trip_name: name, destination, start_date: start, end_date: end, num_people: people});
     }
-
-    if (result.isSuccess) {
-        navigate("/trips");
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+      if (result.isSuccess) {
+          navigate("/trips");
+      } else if (result.isError) {
+          setError(result.error);
+      }
+    }, [result, navigate, error])
 
     return (
      <div className="container" style={{
-            display: "flex", 
-            alignItems: "center", 
+            display: "flex",
+            alignItems: "center",
             justifyContent: "center",
             position: "absolute",
             top: "40%",
@@ -37,8 +38,8 @@ function TripForm() {
             transform: "translate(-50%, -40%)",
             backgroundColor: "#d3c6a3",
             border: "1.75px solid black",
-            width: "15%",
-            height: "25%",
+            width: '250px',
+            height: "365px",
 
         }}>
       <div className="columns is-centered">
@@ -48,13 +49,13 @@ function TripForm() {
           <BulmaInput
               label="Trip name"
               id="name"
-              placeholder="Family Trip"
+              placeholder="Summer Trip"
               value={name}
               onChange={setName} />
             <BulmaInput
               label="Destination"
               id="destination"
-              placeholder="Guadalajara"
+              placeholder="Hawaii"
               value={destination}
               onChange={setDestination} />
             <BulmaInput
@@ -74,11 +75,11 @@ function TripForm() {
             <BulmaInput
               label="Number of people"
               id="people"
-              placeholder="5"
+              placeholder="2"
               value={people}
               onChange={setPeople} />
             <div className="field">
-              <button className="button is-primary">Save</button>
+              <button className="btn btn-dark">Save</button>
             </div>
           </form>
         </div>
