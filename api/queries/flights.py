@@ -27,14 +27,21 @@ class FlightOut(BaseModel):
 
 
 class FlightRepository:
-    def create_flight(self, flight:FlightIn, trip: TripOut)-> FlightOut:
+    def create_flight(self, flight: FlightIn, trip: TripOut) -> FlightOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
                         insert into flights
-                            (number, departure_location, arrival_location, departure_time, arrival_time, trip_id)
+                            (
+                                number
+                                , departure_location
+                                , arrival_location
+                                , departure_time
+                                , arrival_time
+                                , trip_id
+                            )
                         values
                             (%s, %s, %s, %s, %s, %s)
                         returning id;
@@ -48,34 +55,45 @@ class FlightRepository:
                             trip.id
                         ]
                     )
-                    id=result.fetchone()[0]
+                    id = result.fetchone()[0]
                     return self.flight_in_to_out(id, flight)
         except Exception as e:
             print(e)
             return {"message": "create did not work"}
 
-    def get_flights(self, trip: TripOut)-> Error | List[FlightOut]:
+    def get_flights(self, trip: TripOut) -> Error | List[FlightOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        select id, number, departure_location, arrival_location, departure_time, arrival_time, trip_id
+                        select
+                            id
+                            , number
+                            , departure_location
+                            , arrival_location
+                            , departure_time
+                            , arrival_time
+                            , trip_id
                         from flights
                         where trip_id = %s
                         order by departure_time;
                         """,
                         [trip.id]
                     )
-                    return[
+                    return [
                         self.record_to_flight_out(record)
                         for record in db
                     ]
         except Exception as e:
             print(e)
-            return{"message": "could not get all flights"}
+            return {"message": "could not get all flights"}
 
-    def get_flight(self, flight_id: int, trip: TripOut) -> Optional[FlightOut] | Error:
+    def get_flight(
+        self,
+        flight_id: int,
+        trip: TripOut
+    ) -> Optional[FlightOut] | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -93,7 +111,7 @@ class FlightRepository:
                         """,
                         [flight_id, trip.id]
                     )
-                    record=result.fetchone()
+                    record = result.fetchone()
                     if record is None:
                         return None
                     return self.record_to_flight_out(record)
@@ -101,7 +119,12 @@ class FlightRepository:
             print(e)
             return {"message": "could not get that flight"}
 
-    def update_flight(self, flight_id: int, flight: FlightIn, trip: TripOut) -> FlightOut | Error:
+    def update_flight(
+        self,
+        flight_id: int,
+        flight: FlightIn,
+        trip: TripOut
+    ) -> FlightOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -146,8 +169,8 @@ class FlightRepository:
             print(e)
             return False
 
-    def flight_in_to_out(self, id:int, flight:FlightIn):
-        old_data=flight.dict()
+    def flight_in_to_out(self, id: int, flight: FlightIn):
+        old_data = flight.dict()
         return FlightOut(id=id, **old_data)
 
     def record_to_flight_out(self, record):

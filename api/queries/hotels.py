@@ -3,6 +3,7 @@ from typing import Optional, List
 from queries.pool import pool
 from queries.trips import TripOut
 
+
 class Error(BaseModel):
     message: str
 
@@ -13,7 +14,6 @@ class HotelIn(BaseModel):
     city: str
     longitude: float
     latitude: float
-
 
 
 class HotelOut(BaseModel):
@@ -33,7 +33,14 @@ class HotelRepository:
                     result = db.execute(
                         """
                         insert into hotels
-                            (hotel_name, address, city, longitude, latitude, trip_id)
+                            (
+                                hotel_name
+                                , address
+                                , city
+                                , longitude
+                                , latitude
+                                , trip_id
+                            )
                         values
                             (%s, %s, %s, %s, %s, %s)
                         returning id;
@@ -47,11 +54,10 @@ class HotelRepository:
                             trip.id
                         ]
                     )
-                    id=result.fetchone()[0]
+                    id = result.fetchone()[0]
                     return self.hotel_in_to_out(id, hotel)
         except Exception:
             return {"message": "create did not work"}
-
 
     def get_hotels(self, trip: TripOut) -> Error | List[HotelOut]:
         try:
@@ -59,7 +65,14 @@ class HotelRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        select id, hotel_name, address, city, longitude, latitude, trip_id
+                        select
+                            id
+                            , hotel_name
+                            , address
+                            , city
+                            , longitude
+                            , latitude
+                            , trip_id
                         from hotels
                         where trip_id = %s
                         order by hotel_name
@@ -92,7 +105,7 @@ class HotelRepository:
                         """,
                         [hotel_id, trip.id]
                     )
-                    record=result.fetchone()
+                    record = result.fetchone()
                     if record is None:
                         return None
                     return self.record_to_hotel_out(record)
@@ -100,7 +113,12 @@ class HotelRepository:
             print(e)
             return {"message": "could not get that hotel"}
 
-    def update_hotel(self, hotel_id: int, hotel: HotelIn, trip: TripOut) -> HotelOut | Error:
+    def update_hotel(
+        self,
+        hotel_id: int,
+        hotel: HotelIn,
+        trip: TripOut
+    ) -> HotelOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -145,9 +163,8 @@ class HotelRepository:
             print(e)
             return False
 
-
-    def hotel_in_to_out(self, id:int, hotel:HotelIn):
-        old_data=hotel.dict()
+    def hotel_in_to_out(self, id: int, hotel: HotelIn):
+        old_data = hotel.dict()
         return HotelOut(id=id, **old_data)
 
     def record_to_hotel_out(self, record):

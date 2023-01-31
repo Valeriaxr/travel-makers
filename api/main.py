@@ -5,8 +5,6 @@ from authenticator import authenticator
 from routers import hotels, flights, accounts, activities, trips
 
 
-
-
 app = FastAPI()
 app.include_router(authenticator.router)
 app.include_router(hotels.router)

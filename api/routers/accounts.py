@@ -29,6 +29,7 @@ class HttpError(BaseModel):
 
 router = APIRouter()
 
+
 @router.post("/api/accounts", response_model=AccountToken | HttpError)
 async def create_account(
     info: AccountIn,

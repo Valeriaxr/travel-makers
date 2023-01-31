@@ -1,9 +1,7 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import List
 from queries.pool import pool
 from datetime import date
-from queries.accounts import AccountOut
-
 
 
 class Error(BaseModel):
@@ -26,6 +24,7 @@ class TripOut(BaseModel):
     end_date: date
     num_people: int
 
+
 class TripRepository:
     def create_trip(self, trip: TripIn, user_id: int) -> TripOut:
         try:
@@ -34,7 +33,14 @@ class TripRepository:
                     result = db.execute(
                         """
                         insert into trips
-                            (trip_name, destination, start_date, end_date, num_people, user_id)
+                            (
+                                trip_name
+                                , destination
+                                , start_date
+                                , end_date
+                                , num_people
+                                , user_id
+                            )
                         values
                             (%s, %s, %s, %s, %s, %s)
                         returning id;
@@ -48,7 +54,7 @@ class TripRepository:
                             user_id,
                         ]
                     )
-                    id=result.fetchone()[0]
+                    id = result.fetchone()[0]
                     return self.trip_in_to_out(id, trip)
         except Exception as e:
             print(e)
@@ -58,7 +64,7 @@ class TripRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result =db.execute(
+                    result = db.execute(
                         """
                         select id
                         , trip_name
@@ -80,28 +86,38 @@ class TripRepository:
             return {"message": "could not get that trip"}
 
     def get_trips(self, user_id: int) -> Error | List[TripOut]:
-            try:
-                with pool.connection() as conn:
-                    with conn.cursor() as db:
-                        db.execute(
-                            """
-                            select id, trip_name, destination, start_date, end_date, num_people
-                            from trips
-                            where user_id = %s
-                            order by start_date
-                            """,
-                            [user_id]
-                        )
-                        return [
-                            self.record_to_trip_out(record)
-                            for record in db
-                        ]
-            except Exception as e:
-                print(e)
-                return {"message": "could not get all trips"}
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        select
+                            id
+                            , trip_name
+                            , destination
+                            , start_date
+                            , end_date
+                            , num_people
+                        from trips
+                        where user_id = %s
+                        order by start_date
+                        """,
+                        [user_id]
+                    )
+                    return [
+                        self.record_to_trip_out(record)
+                        for record in db
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "could not get all trips"}
 
-
-    def update_trip(self, trip_id: int, trip: TripIn, user_id: int) -> TripOut | Error:
+    def update_trip(
+        self,
+        trip_id: int,
+        trip: TripIn,
+        user_id: int
+    ) -> TripOut | Error:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -146,8 +162,8 @@ class TripRepository:
             print(e)
             return False
 
-    def trip_in_to_out(self, id:int, trip:TripIn):
-        old_data=trip.dict()
+    def trip_in_to_out(self, id: int, trip: TripIn):
+        old_data = trip.dict()
         return TripOut(id=id, **old_data)
 
     def record_to_trip_out(self, record):

@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from queries.pool import pool
 
+
 class AccountIn(BaseModel):
     email: str
     password: str
@@ -24,7 +25,11 @@ class AccountOut(BaseModel):
 
 
 class AccountRepository:
-    def create_account(self, account:AccountIn, hashed_password: str)-> Account:
+    def create_account(
+        self,
+        account: AccountIn,
+        hashed_password: str
+    ) -> Account:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -42,7 +47,7 @@ class AccountRepository:
                         account.last_name
                     ]
                 )
-                id=result.fetchone()[0]
+                id = result.fetchone()[0]
                 return Account(
                     id=id,
                     email=account.email,
@@ -51,8 +56,7 @@ class AccountRepository:
                     last_name=account.last_name,
                 )
 
-
-    def get_account(self, email: str)-> Account:
+    def get_account(self, email: str) -> Account:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -67,7 +71,7 @@ class AccountRepository:
                     """,
                     [email]
                 )
-                record=result.fetchone()
+                record = result.fetchone()
                 if record is None:
                     return None
                 return Account(
