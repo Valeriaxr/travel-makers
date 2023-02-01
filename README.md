@@ -39,3 +39,25 @@ Our app is designed to help users plan and organize their travel plans all in on
 
 The intended audience for our vacation planning application is individuals and families who are planning a trip. This includes individuals who are planning a solo trip, couples planning a romantic getaway, and families planning a vacation with children.\
 In terms of demographics, our target audience is primarily composed of individuals and families who are in their 20s-50s, with a moderate to high income. They are tech-savvy, and comfortable with using online platforms to plan and book their vacations.
+
+## Unit Testing
+Alex Reiman: test_trips\
+Anderson Ngo: test_activities\
+Valeria Ramirez: test_hotels\
+Victoria Figueroa: test_flights
+
+## Set Up
+
+Clone the repository down to your local machine/
+CD into the new project directory/
+Run docker volume create travel-data
+
+Run docker compose build
+
+Run docker compose up
+
+Run docker exec -it travel-makers-api-1 bash
+
+Run python manage.py loaddata products.json
+
+Exit the container's CLI, and enjoy Travel Makers!
